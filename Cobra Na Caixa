@@ -1,0 +1,600 @@
+#include <stdio.h>
+#include <windows.h>
+#include <conio.h>
+#include <time.h>
+
+#define NUM_CAIXAS 5
+
+int main(){
+	
+	srand(time(NULL));
+	
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	char tela[7][18];
+	char tecla = 'p';
+	char player, player2;
+	int px = 5, py = 8, px2 = 5, py2 = 8,portax = 6, portay = 8;
+	int r = 0, x, y, fundo = 32;
+	char caixa = 219;
+	char porta = 238;
+	int fase = 0, vez =0,person=2,person2=4;
+	int chapeu = 7, chap = 220;
+	int mudarch = 178;
+	char caixa1 = 1, caixa2 = 2, caixa3 = 3, caixa4 = 4;
+	int up = 72, down = 80, left = 75, right = 77;
+	int confirm = 0;
+	int caixaE1=0, caixaE2=0;
+	int p1caixa = NULL, p2caixa = NULL ;
+	int i;
+	
+	
+	vez = rand() % 2+1;
+	
+	for (x = 0; x < 7; x++) {
+    for (y = 0; y < 18; y++) {	
+	tela[x][y];
+	}}
+	
+	
+	do{	
+	//troca de vez	
+	if(confirm == 0 && vez == 1){
+		px2=-1;
+		py2=-1;
+	}
+	if(confirm == 0 && vez == 2){
+		px=-1;
+		py=-1;	
+	}
+	if(confirm == 2 && vez == 1){
+	px=5;
+	py=8;
+	px2=-1;
+	py2=-1;	
+	confirm=0;
+	}
+	if(confirm == 1 && vez == 2){
+	px=-1;
+	py=-1;	
+	px2=5;
+	py2=8;	
+	confirm=0;
+	}
+	
+	
+	
+	
+	//troca de vez		
+	while(r <= 0){	
+		
+	tela[px][py] = player;	
+	tela[portax][portay] = porta;  	
+	tela[px2][py2] = player2;
+	
+	for (x = 0; x < 7; x++) {
+    for (y = 0; y < 18; y++) {
+    
+	
+		
+/*	do{
+    indice = rand() % 4;
+    }while(completadas[indice]);
+*/	
+		
+	for(int o=7; o <=9;o++){
+	tela[1][o] = caixa1;
+	}
+	tela[2][3] = caixa2;
+	tela[4][13] = caixa3;
+	tela[4][3] = caixa4;	
+	tela[2][13] = caixa;
+		
+	
+	
+	if(tela[x][y] == porta){//porta
+    SetConsoleTextAttribute(hConsole,0 | 7);
+	printf("%c", tela[x][y] = 238);
+	
+	}
+	
+	else if(tela[x][y] == caixa1){//caixa 1
+	if(caixaE1 == 0 || caixaE2 == 0){	
+	SetConsoleTextAttribute(hConsole, 224);
+	}if(caixaE1 == 1){
+	SetConsoleTextAttribute(hConsole, person);	
+	}if(caixaE2 == 1){
+	SetConsoleTextAttribute(hConsole, person2);	
+	}
+	printf("%c", tela[x][y] = 223);	
+		
+	}
+	else if(tela[x][y] == caixa2){//caixa 2
+	if(caixaE1 == 0 || caixaE2 == 0){	
+	SetConsoleTextAttribute(hConsole, 0);
+	} if(caixaE1 == 2){
+	SetConsoleTextAttribute(hConsole, person | person*16);	
+	} if(caixaE2 == 2){
+	SetConsoleTextAttribute(hConsole, person2 | person2*16);	
+	}
+	printf("%c", tela[x][y] = 223);	
+		
+	}
+	else if(tela[x][y] == caixa3){//caixa 3
+	if(caixaE1 == 0 || caixaE2 == 0){	
+	SetConsoleTextAttribute(hConsole, 0);
+	} if(caixaE1 == 3){
+	SetConsoleTextAttribute(hConsole, person | person*16);	
+	} if(caixaE2 == 3){
+	SetConsoleTextAttribute(hConsole, person2 | person2*16);	
+	}
+	printf("%c", tela[x][y] = 223);	
+		
+	}
+	else if(tela[x][y] == caixa4){//caixa 4
+	if(caixaE1 == 0 || caixaE2 == 0){	
+	SetConsoleTextAttribute(hConsole, 0);
+	} if(caixaE1 == 4){
+	SetConsoleTextAttribute(hConsole, person | person*16);	
+	} if(caixaE2 == 4){
+	SetConsoleTextAttribute(hConsole, person2 | person2*16);	
+	}
+	printf("%c", tela[x][y] = 223);	
+		
+	}
+	else if(tela[x][y] == caixa){//caixa 5
+	if(caixaE1 == 0 || caixaE2 == 0){	
+	SetConsoleTextAttribute(hConsole, 0);
+	} if(caixaE1 == 5){
+	SetConsoleTextAttribute(hConsole, person | person*16);	
+	} if(caixaE2 == 5){
+	SetConsoleTextAttribute(hConsole, person2 | person2*16);	
+	}
+	printf("%c", tela[x][y] = 223);	
+		
+	}
+	
+	else if(tela[x][y] == player && vez == 1){//player 1			
+	SetConsoleTextAttribute(hConsole, person);
+	printf("%c", tela[x][y] = 223);
+	
+	}
+	else if(tela[x][y] == player2 && vez == 2){//player 2				
+	SetConsoleTextAttribute(hConsole, person2);
+	printf("%c", tela[x][y] = 223);
+	
+	}
+	
+	else{//tela
+	SetConsoleTextAttribute(hConsole,128);
+	printf("%c", tela[x][y]);	
+	SetConsoleTextAttribute(hConsole,7);
+	}
+	
+	
+	tela[x][y] = fundo;
+		
+	
+	}
+	printf("\n");
+	}
+	
+	r = 1;
+	
+	
+	
+	}	
+	
+
+	if((fase == 0 && px == 2 || px2 == 2) && ((py >= 7 && py <= 9) ||(py2 >= 7 && py2 <=9))){//caixa 1
+		
+		printf("\n ABRIR CAIXA \n");
+		printf(" PRESSIONE E");
+		
+	
+	}else if(fase == 0 && (px == 2 && py == 4) || (px2 == 2 && py2 == 4)){//caixa 2
+		
+		printf("\n ABRIR CAIXA \n");
+		printf(" PRESSIONE E");
+		
+	}else if(fase == 0 && (px == 4 && py == 4) || (px2 == 4 && py2 == 4)){//caixa 4
+		
+		printf("\n ABRIR CAIXA \n");
+		printf(" PRESSIONE E");
+		
+	}else if(fase == 0 && (px == 2 && py == 12) || (px2 == 2 && py2 == 12)){//caixa 3
+		
+		printf("\n ABRIR CAIXA \n");
+		printf(" PRESSIONE E");
+		
+	}else if(fase == 0 && (px == 4 && py == 12) || (px2 == 4 && py2 == 12)){//caixa 5
+		
+		printf("\n ABRIR CAIXA \n");
+		printf(" PRESSIONE E");
+		
+	}
+	
+	
+	//fim caixa	
+	
+	if(fase == 0 && ((px >= 5 && px <= 6) || (px2 >= 5 && px2 <= 6)) && 
+	((py >= 7 && py <= 9) || (py2 >= 7 && py2 <= 9)) ){
+		printf("\n| PORTA |\n");
+		printf("\nPRESS E: ");
+		printf("SAIR");
+		if(tecla == 'e'){
+			break;
+		}
+	}
+	
+	if(vez == 1){	
+	SetConsoleTextAttribute(hConsole,112);
+	printf("\n\nNA VEZ:  PLAYER 1 ");
+	SetConsoleTextAttribute(hConsole, person);
+	printf("%c", player = 223);
+	SetConsoleTextAttribute(hConsole, 112);
+	printf(" ");
+	SetConsoleTextAttribute(hConsole,112);
+	printf("\nPROXIMO: PLAYER 2 ");
+	SetConsoleTextAttribute(hConsole, person2);
+	printf("%c", player2 = 223);
+	SetConsoleTextAttribute(hConsole, 112);
+	printf(" \n\n");
+	
+	
+	SetConsoleTextAttribute(hConsole,7);
+	}else if(vez == 2){
+	SetConsoleTextAttribute(hConsole,112);
+	printf("\n\nNA VEZ:  PLAYER 2 ");
+	SetConsoleTextAttribute(hConsole, person2);
+	printf("%c", player = 223);
+	SetConsoleTextAttribute(hConsole, 112);
+	printf(" ");
+	SetConsoleTextAttribute(hConsole,112);
+	printf("\nPROXIMO: PLAYER 1 ");
+	SetConsoleTextAttribute(hConsole, person);
+	printf("%c", player2 = 223);
+	SetConsoleTextAttribute(hConsole, 112);
+	printf(" \n\n");
+	SetConsoleTextAttribute(hConsole, 7);
+	}
+	
+	
+	
+	printf("player 1 %d %d\n", px, py);
+	printf("player 2 %d %d", px2, py2);
+
+	
+	
+	
+	while(r >= 1){//loop	
+				
+	if(tecla == 'p'){
+		r = 0;
+	}
+	tecla = NULL;
+	if(_kbhit()){
+		tecla = getch();
+		}
+			
+	
+	
+		//PORTA
+		if(tecla == 's' && px == 5 && py == 8){
+		px--;	
+		}if(tecla == 'd' && px == 6 && py == 7){
+		py--;	
+		}if(tecla == 'a' && px == 6 && py == 9){
+		py++;	
+		}
+		//PORTA
+		//LIMITE DO MAPA
+		if(tecla == 'w' && px == 0 && (py >= 0 && py <= 17)){
+		px++;	
+		}if(tecla == 'a' && (px >= 0 && px <= 6) && py == 0){
+		py++;	
+		}if(tecla == 's' && px == 6 && (py >= 0 && py <= 17)){
+		px--;	
+		}if(tecla == 'd' && (px >= 0 && px <= 6) && py == 17){
+		py--;	
+		}
+		
+		if(tecla == up && px2 == 0 && (py2 >= 0 && py2 <= 17)){
+		px2++;	
+		}if(tecla == left && (px2 >= 0 && px2 <= 6) && py2 == 0){
+		py2++;	
+		}if(tecla == down && px2 == 6 && (py2 >= 0 && py2 <= 17)){
+		px2--;	
+		}if(tecla == right && (px2 >= 0 && px2 <= 6) && py2 == 17){
+		py2--;	
+		}
+		
+		//LIMITE DO MAPA
+		//CAIXA 
+		if(tecla == 'w' && (px == 2) && (py >= 7 && py <= 9)){
+		px++;
+		}if(tecla == 's' && (px == 0) && (py >= 7 && py <= 9)){
+		px--;
+		}if(tecla == 'd' && (px == 1 && py == 6)){
+			py--;
+		}if(tecla == 'a' && (px == 1 && py == 10)){
+		py++;
+		}
+		//CAIXA 
+		if(tecla == 'a' && (px == 2 && py == 4)){
+		py++;		
+		}if(tecla == 's' && (px == 1 && py == 3)){
+		px--;		
+		}if(tecla == 'd' && (px == 2 && py == 2)){
+		py--;		
+		}if(tecla == 'w' && (px == 3 && py == 3)){
+		px++;		
+		}
+		//CAIXA 
+		if(tecla == 'a' && px == 4 && py == 4){
+		py++;	
+		}if(tecla == 's' && px == 3 && py == 3){
+		px--;	
+		}if(tecla == 'd' && px == 4 && py == 2){
+		py--;	
+		}if(tecla == 'w' && px == 5 && py == 3){
+		px++;	
+		}
+		//CAIXA
+		if(tecla == 'w' && px == 5 && py == 13){
+		px++;	
+		}if(tecla == 's' && px == 3 && py == 13){
+		px--;	
+		}if(tecla == 'd' && px == 4 && py == 12){
+		py--;	
+		}if(tecla == 'a' && px == 4 && py == 14){
+		py++;	
+		}
+		//CAIXA
+		if(tecla == 'd' && px == 2 && py == 12){
+		py--;	
+		}if(tecla == 's' && px == 1 && py == 13){
+		px--;
+		}if(tecla == 'a' && px == 2 && py == 14){
+		py++;	
+		}if(tecla == 'w' && px == 3 && py == 13){
+		px++;	
+		}
+		//CAIXA													
+	
+	
+			
+	if(vez == 1 && tecla == 'w'){
+		px--;
+		r = 0;
+	}if(vez == 1 && tecla == 's'){
+		px++;
+		r = 0;
+	}if(vez == 1 && tecla == 'a'){
+		py--;
+		r = 0;
+	}if(vez == 1 && tecla == 'd'){
+		py++;
+		r = 0;
+	}if(tecla == 'e'){
+		r = 0;
+	}
+	if(vez == 2 && tecla == up){//cima
+		px2--;
+		r = 0;
+	}if(vez == 2 && tecla == down){//baixo
+		px2++;
+		r = 0;
+	}if(vez == 2 && tecla == left){//esquerda
+		py2--;
+		r = 0;
+	}if(vez == 2 && tecla == right){//direita
+		py2++;
+		r = 0;
+	}if(tecla == 'k' ){
+		r = 0;
+	}
+	
+		
+		
+		
+		if((fase == 0 && px == 2 || px2 == 2) && ((py >= 7 && py <= 9) ||(py2 >= 7 && py2 <=9))){//caixa 
+			
+		if(caixaE2 != 1 && vez ==  1 && tecla == 'e'){
+			
+		p1caixa =1 + rand() % 5;
+							 			  		
+		caixaE1 = 1;	
+		vez=2;
+		confirm = 1;
+		tecla = NULL;
+		r=0;
+		
+		
+		
+	
+		}
+		else if(caixaE1 != 1 && vez == 2 && tecla == 'k'){
+			
+		p2caixa =1 + rand() % 5;	
+				
+		caixaE2 = 1;	
+		vez=1;
+		confirm = 2;
+		tecla = NULL;
+		r=0;	
+		
+		
+		
+		
+		}
+		
+		
+		}else if(fase == 0 && (px == 2 && py == 4) || (px2 == 2 && py2 == 4)){//caixa 2
+		if( caixaE2 != 2 && vez ==  1 && tecla == 'e'){
+		
+		p1caixa =1 + rand() % 5;		
+		
+				
+		caixaE1 = 2;	
+		vez=2;
+		confirm = 1;
+		tecla = NULL;
+		r=0;	
+		
+		
+		
+		}else if(caixaE1 != 2 && vez == 2 && tecla == 'k'){
+			
+		p2caixa =1 + rand() % 5;		
+			
+		caixaE2 = 2;	
+		vez=1;
+		confirm = 2;
+		tecla = NULL;
+		r=0;	
+		
+		
+		
+		}
+		
+		
+		}else if(fase == 0 && (px == 4 && py == 4) || (px2 == 4 && py2 == 4)){//caixa 4
+		if(caixaE2 != 4 && vez ==  1 && tecla == 'e'){
+			
+		p1caixa =1 + rand() % 5;		
+			
+		caixaE1 = 4;	
+		vez=2;
+		confirm = 1;
+		tecla = NULL;
+		r=0;	
+		
+		
+		}else if(caixaE1 != 4 && vez == 2 && tecla == 'k'){
+			
+		p2caixa =1 + rand() % 5;		
+			
+		caixaE2 = 4;	
+		vez=1;
+		confirm = 2;
+		tecla = NULL;
+		r=0;	
+		
+		
+		}
+		}else if(fase == 0 && (px == 2 && py == 12) || (px2 == 2 && py2 == 12)){//caixa 5
+		if(caixaE2 != 5 && vez ==  1 && tecla == 'e'){
+			
+		p1caixa =1 + rand() % 5;
+					
+		caixaE1 = 5;	
+		vez=2;
+		confirm = 1;
+		tecla = NULL;
+		r=0;	
+		
+		
+		}else if(caixaE1 != 5 && vez == 2 && tecla == 'k'){
+			
+		p2caixa =1 + rand() % 5;		
+			
+		caixaE2 = 5;	
+		vez=1;
+		confirm = 2;
+		tecla = NULL;
+		r=0;	
+		
+		
+		}
+		}else if(fase == 0 && (px == 4 && py == 12) || (px2 == 4 && py2 == 12)){//caixa 3
+		if(caixaE2 != 3 && vez ==  1 && tecla == 'e'){
+			
+		p1caixa =1 + rand() % 5;		
+			
+		caixaE1 = 3;
+		vez=2;
+		confirm = 1;
+		tecla = NULL;
+		r=0;	
+		
+		
+		}else if(caixaE1 != 3 && vez == 2 && tecla == 'k'){
+			
+		p2caixa =1 + rand() % 5;		
+			
+		caixaE2 = 3;	
+		vez=1;
+		confirm = 2;
+		tecla = NULL;
+		r=0;	
+		
+		
+		}
+		
+		
+		}
+		
+		if(p1caixa != NULL && p2caixa != NULL){
+		system("cls");	
+		
+		
+		
+		if(p1caixa == 1){
+		printf("\nPlayer 1 ");	
+		printf("Achou A Cobra\n");
+	 	p1caixa = NULL;
+			
+		}else if(p2caixa == 1){
+		printf("\nPlayer 2: ");	
+		printf("Achou A Cobra\n");
+	 	p2caixa = NULL;
+		r=0;	
+		}
+		
+		if(p1caixa == 2){	
+		printf("\nPlayer 1: ");
+		printf("Achou o Botao\n");
+	 	p1caixa = NULL;	
+	 	
+		}else if(p2caixa == 2){	
+		printf("\nPlayer 2: ");
+		printf("Achou o Botao\n");
+	 	p2caixa = NULL;
+		r=0;	
+		}
+		
+		
+		
+		if(p1caixa >= 3 && p1caixa <= 5 && p2caixa >= 3 && p2caixa <= 5){
+		printf("\n\nPlayer 1: ");		
+		printf("Caixa Vazia\n");
+		printf("\nPlayer 2: ");		
+		printf("Caixa Vazia\n\n");
+	 	p1caixa = NULL;
+	 	p2caixa = NULL;
+	 	caixaE1 = NULL;
+	 	caixaE2 = NULL;
+		r=0;    		
+		    		
+		}
+		
+		system("pause");
+		}
+		
+		
+		
+		}//lopp
+	
+		
+
+		
+			
+	system("cls");
+	}while(r <= 3);
+	
+	
+		
+	return 0;	
+	
+	}
+	
