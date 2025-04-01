@@ -1,0 +1,4716 @@
+#include <stdio.h>
+#include <locale.h>
+#include <windows.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <time.h>
+#include <ctype.h>
+
+
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+int naveg = 0;	
+char tecla;	
+int rep = 0;
+char a = 0,c = NULL;
+int xx;	
+int re = 0;
+int fase = 0;			
+int som = 352;
+int person = 7, person2 = 7;
+
+		
+int somV();
+int somD();				
+int menu();			
+int jogo1();
+int lobbyjogo2();
+int game2();
+int jogo3();
+int sair();	   	
+	
+		
+int main(){
+
+	
+	while(c <= 1){//MENU | JOGO 1 A 3
+	system("cls");
+
+
+	if(a == 0){//executa menu	
+		menu();
+		
+	}//menu
+
+	if(a == '1'){//executa jogo 1
+		
+		jogo1();
+			
+	}//jogo 1	
+	
+	
+	
+	
+	if(a == '2'){//executa jogo 2				 			     		
+	  naveg=0;
+  	   
+	   lobbyjogo2();	
+		
+	}//Jogo 2	
+	
+	if(a == '3'){//executar Jogo 3
+		
+		jogo3();
+		
+	}//Jogo 3
+	
+	 
+}//loop
+	
+
+
+
+
+
+if (a == 4){//executa sair
+		
+		sair();
+		
+	}//FIM SAIR
+	
+return 0;
+}
+
+
+
+
+
+
+
+int menu(){
+	
+	int cor,cor2,cor3,cor4;
+	int y = 0;
+	char *b1[5] = {"\n* * *MENU PRINCIPAL* * *", "Perguntas e Respostas",
+	 "Cobra Na Caixa", "Gousma War",
+	 "Sair"};
+	 if(naveg < 0){
+	naveg = 3;
+	}else if(naveg > 3){
+		naveg = 0;
+	}
+	 
+    switch(naveg){
+		
+	case 0:		   		   	
+	cor = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;	
+	cor2 = 7;
+	cor3 = 7;
+	cor4 = 7;	
+	break;	
+	
+	case 1:
+	cor = 7;	
+	cor2 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	cor3 = 7;
+	cor4 = 7;		
+	break;
+	    
+	case 2:
+			
+	cor2 = 7;
+	cor3 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	cor4 = 7;
+	break;	
+		
+	case 3:
+	cor2 = 7;
+	cor3 =7;
+	cor4 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	break;
+	
+	}
+	printf("\n %s \n", b1[0]);
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("\n ----------------------\n|");
+	SetConsoleTextAttribute(hConsole, cor);
+	printf("%s ", b1[1]);
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("| \n ----------------------\n|");
+	SetConsoleTextAttribute(hConsole, cor2);
+	printf("   %s     ",b1[2]);
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("| \n ----------------------\n|");
+	SetConsoleTextAttribute(hConsole, cor3);
+	printf("     %s       ",b1[3]);
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("| \n ----------------------\n|"); 
+	SetConsoleTextAttribute(hConsole, cor4);
+	printf("        %s          ",b1[4]);
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("| \n ----------------------");
+	printf("\n\nNavegacao:");
+	printf("\nCIMA  - w\nBAIXO - s ");
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\nConfirmacao - Enter");
+	SetConsoleTextAttribute(hConsole, 7);
+	
+	
+	while(y <= 1){
+	tecla = NULL;
+	if(_kbhit()){
+		tecla = getch();
+	    }
+		
+		if(tecla == 'w' || tecla == 'W'){
+			naveg--;
+			y = 2;
+		}if(tecla == 's' || tecla == 'S'){
+			naveg++;
+			y = 2;
+		}
+		
+		if(rep == 1){
+			a = '1';
+			y = 2;
+		}
+		
+		if(naveg == 0){
+			if(tecla == 13){
+			a = '1';
+			naveg = 0;
+			y = 2;
+			Beep(500, 50);
+			Beep(700, 50);
+			}
+		}if(naveg == 1){
+			if(tecla == 13){
+			a = '2';
+			c = '2';
+			y = 2;
+			Beep(som, 50);
+			}
+		}if(naveg == 2){
+			if(tecla == 13){
+			a = '3';
+			y = 2;
+			Beep(som, 50);
+			}
+		}if(naveg == 3){
+			if(tecla == 13){
+			a = 4;
+			c = '2';
+			y = 2;
+			Beep(som, 50);
+			}
+		}	
+  	
+	}
+	
+	
+}
+
+
+	int jogo1(){//jogo 1 inicio
+	
+	int som = 352;
+	int ordem[5];
+	
+	char b = NULL;
+	int rep = 0;
+	char tecla;
+	//notas musicais
+	int d = 261, d_m = 523, r = 300,
+	 r_m = 587, m = 330, 
+	m_m = 659, f = 352, 
+	so = 396, l = 440, 
+	si = 495;
+	//notas musicais
+	int p1=0,p2=0,p3=0,p4=0,p5=0;
+	char *pl_1[4] = {"A)","B)A cadela Laika","C)Neil Armstrong","D)Marcos Pontes"},
+	*pl_2[4] = {"A) Mauna Kea", "B) Dhaulagiri", "C) Monte Chimborazo", "D)"},
+	*pl_3[4] = {"A) Colombia", "B)", "C) China", "D) Bolvia"},
+	*pl_4[4] = {"A) Graham Bell", "B) Steve Jobs", "C)", "D) Henry Ford"}, 
+	*pl_5[4] = {"A) I", "B) II", "C) III", "D)"};
+	int i1 = NULL,i2 = NULL,i3 = NULL,i4 = NULL,i5 = NULL;
+	
+	
+	char texto[] = "No jogo 'Perguntas e Respostas', serao 5 Perguntas com 4 alternativas cada. \nNele veremos assuntos relacionados a Ciencias,Geografia e Portugues. ",
+	texto2[] = "\n\nAs Perguntas Serao Escolhidas De Forma Aleatoria E No Final Sera Mostrado \nQuantas Questoes Foram Acertadas e Quais Foram.",
+	regras[] = "\nPara Escolher Uma Alternativa E Necessario Apenas Um Clique Na Tecla \nQue Represente A Letra Da Alternativa Escolhida.\n";
+	
+		
+	char perg1[] = " | Quem foi a primeira pessoa a viajar no Espaco? |\n",
+	exp1[] = "O russo Yuri Gagarin (1934-1968) foi a primeira pessoa \na viajar para o espaco, o que aconteceu em 12 de abril de 1961.";
+
+	char perg2[] = " | Qual a montanha mais alta do mundo? |\n",
+	exp2[] = "O Monte Everest tem 8.848 metros de altitude e localiza-se no Nepal, \num pais asiatico que faz fronteira com a China e com a India.";
+
+	char perg3[] = "| Onde se localiza Machu Picchu? |\n",
+	exp3[] = "Machu Picchu localiza-se no Peru, pais da America do Sul que faz fronteira com o Brasil.";
+	
+	char perg4[] = "| Quem inventou a lampada? |\n",
+	exp4[] = "A lampada foi inventada por Thomas Edison (1847-1931) em 1879. No dia 21 de outubro,\n o inventor conseguiu manter uma lampada acessa durante 48 horas.";
+	
+	char perg5[] = " | Diante da visao de um predio com uma placa indicando SAPATARIA PAPALIA, um jovem deparou com a duvida:\n como pronunciar a palavra PAPALIA? |\n\n",
+	perg5_1[] ="Levado o problema a sala de aula, a discussao girou em torno da utilidade de conhecer as regras de acentuacao e,\n especialmente, do auxilio que elas podem dar a correta pronuncia de palavras. Apos discutirem pronuncia, regras de\n acentuacao e escrita, tres alunos apresentaram as seguintes conclusoes a respeito da palavra PAPALIA:",
+	perg5_2[] ="\nI. Se a silaba tonica for o segundo PA, a escrita deveria ser PAPALIA, pois a palavra seria paroxitona terminada\n em ditongo crescente.\nII. Se a silaba tonica for LI, a escrita deveria ser PAPALIA, pois ``i`` \ne ``a`` estariam formando hiato.\n",
+	perg5_3[] ="III. Se a silaba tonica for LI, a escrita deveria ser PAPALIA, pois nao haveria razao para o uso de acento grafico.\n\n",
+	exp5[] = "A afirmativa I esta de acordo com a seguinte regra: sao acentuadas as paroxitonas terminadas em ditongo\n crescente. A afirmativa II nao segue a seguinte regra: em hiatos, o ``i`` e o ``u`` tonicos(isolados na silaba ou formando silaba com S)\n sao acentuados desde que precedidos de vogal. Por fim, a \nafirmativa III esta correta, ja que paroxitonas \nterminadas em A nao sao acentuadas.";
+	
+		srand(time(NULL));	
+		char quests[4] = {'1', '2', '3', '4'};
+		int questvi[4] = {0}; 
+		int total_c = 0;
+			
+		int y = 0;
+		int cor,cor2,cor3;
+		
+		
+		while(y <= 2){
+		char *b1[4] = {"\n**Perguntas e Respostas**", "PLAY", "DESCRICAO", "VOLTAR"};
+		b = NULL; 
+		 if(naveg < 0){
+		naveg = 2;
+		}else if(naveg > 2){
+		naveg = 0;
+		}
+    	switch(naveg){
+		
+	case 0:		   		   
+	cor = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;	
+	cor2 = 7;
+	cor3 = 7;	
+	break;	
+	
+	case 1:
+	cor = 7;	
+	cor2 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	cor3 = 7;		
+	break;
+	    
+	case 2:
+	cor = 7;		
+	cor2 = 7;
+	cor3 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	break;	
+	
+	}
+	
+		system("cls");	
+		printf("%s\n", b1[0]);
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor);
+		printf("    %s    ", b1[1]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor2);
+		
+		printf("  %s " , b1[2]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor3);
+		printf("   %s   ", b1[3]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		SetConsoleTextAttribute(hConsole, 7);
+		
+		
+		while(y <= 1){
+		tecla = NULL;	
+		if(_kbhit()){
+		tecla = getch();
+	    }	
+	    
+	    if(tecla == 'w'){
+			naveg--;
+		 	y = 3;
+		}if(tecla == 's'){
+			naveg++;
+			y = 3;
+		}
+		
+		if(rep == 1){
+			b = '5';
+			y = 3;
+		}
+		if(naveg == 0){
+		if(tecla == 13){
+			b = '5';
+			y = 3;
+			
+		}}
+		
+		if(naveg == 1){
+		if(tecla == 13){
+			a = '2';
+			y = 3;
+			
+		}}
+		if(naveg == 2){
+		if(tecla == 13){
+			a = NULL;
+			y = 3;
+			Beep(300, 50);
+			naveg = 0;
+		}}
+		
+
+		}}
+		
+		if(a == '2'){//REGRAS
+		tecla = NULL;
+		int y = 0;
+		naveg = 0;
+		int cor, cor1;
+		char *bi[2] = {"Voltar", "Menu Principal"};
+		int t = 500000;
+		while(y <= 1){	
+		int cores = (rand() % 15) + 1;	
+		if(naveg < 0){
+		naveg = 1;
+		}else if(naveg > 1){
+		naveg = 0;
+		  }	
+		y = 0;	
+		system("cls");
+		printf("\n **DESCRICAO** \n\n");
+		
+    	for (int q = 0; texto[q] != '\0'; q++) {
+	    putchar(texto[q]);
+        for (int j = 0; j < t; j++);
+		}
+		
+		for (int q = 0; texto2[q] != '\0'; q++) {
+	    if(q >= 40 && q <= 50){
+			SetConsoleTextAttribute(hConsole, cores);
+			putchar(texto2[q]);
+		}else{
+			SetConsoleTextAttribute(hConsole, 7);
+			putchar(texto2[q]);	
+		}
+		
+		
+        for (int j = 0; j < t; j++);
+		}
+	
+		SetConsoleTextAttribute(hConsole,12);
+		printf("\n\nComo Faco Para Escolher Uma Alternativa?");
+		SetConsoleTextAttribute(hConsole,7);
+		for (int q = 0; regras[q] != '\0'; q++) {
+	    putchar(regras[q]);
+        for (int j = 0; j < t; j++);
+		}	
+		 switch(naveg){
+		
+	case 0:		   		   
+	cor = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;	
+	cor2 = 7;
+	break;	
+	
+	case 1:
+	cor = 7;	
+	cor2 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	break;
+	
+	}
+	   SetConsoleTextAttribute(hConsole, 7);	
+		printf("\n\n |");
+		SetConsoleTextAttribute(hConsole, cor);
+		printf("      %s      ", bi[0]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("| \n");
+		printf(" |");
+		SetConsoleTextAttribute(hConsole, cor2);
+		printf("  %s  ", bi[1]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("| \n");
+		SetConsoleTextAttribute(hConsole, 7);
+	
+		
+		
+		while(y <= 0){
+		tecla = NULL;	
+		if(_kbhit()){
+		tecla = getch();
+	    }
+		if(tecla == NULL){
+			y = 1;
+			t = 0;
+			Sleep(200);
+		}
+		if(tecla == 'w'){
+			naveg--;
+		 	y = 1;
+		 	t = 0;
+		}if(tecla == 's'){
+			naveg++;
+			y = 1;
+			t = 0;
+		}
+		if(naveg == 0){
+		if(tecla == 13){
+			a = '1';
+			y = 2;
+		}}
+		if(naveg == 1){		  		
+		 if(tecla == 13){
+			a= NULL;
+			y = 2;
+			
+		}}
+		
+		}}
+		naveg = 0;
+		}//FIM REGRAS
+		
+		if(b == '5'){//inicio das perguntas
+		while(total_c < 4){//loop
+			
+        int indice;
+        do {
+            indice = rand() % 4;
+        } while (questvi[indice]);
+
+        questvi[indice] = 1; 
+        ordem[total_c] = indice;
+        total_c++;
+			
+		  if(quests[indice] == quests[0]){//PERGUNTA 1
+			int t1 = 200, t2 = 5000000, t3 = 50, som1 = 700;
+			int y = 0;
+			while(y <= 2){		
+			y = NULL;	
+			system("cls");	
+			tecla = NULL;
+				
+				for (int q = 0; perg1[q] != '\0'; q++) { 
+	    		putchar(perg1[q]);						
+        		for (int j = 0; j < t2; j++);
+			  	  }	
+			    printf("\n--------------------------\n");
+				printf("\n A) Yuri Gagarin \n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n B) A cadela Laika\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n C) Neil Armstrong\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n D) Marcos Pontes\n");
+				printf("\n--------------------------\n");
+				Beep(som1, t3);
+				
+				while(y <= 1){	
+				if(_kbhit()){
+				tecla = getch();
+	    		}
+				
+				
+				if(tecla == 'a' || tecla == 'A'){//Certa
+				system("cls");	
+				printf("\n \\/ Altenativa certa: A) Yuri Gagarin \\/\n");
+				p1=1;	
+				somV();
+				system("pause");
+				y = 3;		
+				}
+				else if((tecla >= 65 && tecla <= 68) || (tecla >= 97 && tecla <= 100)){//Errada
+				system("cls");
+				if(tecla == 'a' || tecla == 'A'){
+					pl_1[i1] = pl_1[0];	
+				}if(tecla == 'b' || tecla == 'B'){
+					pl_1[i1] = pl_1[1]  ;
+				}if(tecla == 'c' || tecla == 'C'){
+					pl_1[i1] = pl_1[2];
+				}if(tecla == 'd' || tecla == 'D'){
+					pl_1[i1] = pl_1[3];
+
+				}
+				printf("\n X Altenativa Errada X\n");
+				somD();
+				printf("\nAlternativa Certa: A)Yuri Gagarin\n");
+				printf("\nEXPLICACAO : ");
+				
+				for (int q = 0; exp1[q] != '\0'; q++) {
+				putchar(exp1[q]);	
+  				for (int j = 0; j < 2000000; j++);
+ 	  	  	  	  }
+ 	  	  	    printf("\n\n");
+				system("pause");
+				y = 3; 	  	  	    
+				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){//Invalida
+					system("cls");
+					printf("\n\n   INVALIDO\n\n");
+					 t1 = 0;	
+ 	 		   	  	 t2 = 0; 
+				 	t3	= 0;
+				 	som1 = 0;
+					quests[indice] == quests[0];
+					y = 2;
+				}}}}//FIM PERGUNTA 1
+				
+				if(quests[indice] == quests[1]){//PERGUNTA 2
+					int t1 = 200, t2 = 5000000, t3 = 50, som1 = 700;
+					int y = 0;
+					
+					while(y <= 2){
+					y = NULL;	
+					system("cls");	
+					tecla = NULL;	
+						
+					for (int q = 0; perg2[q] != '\0'; q++) {
+   					putchar(perg2[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    
+	  	    	printf("\n--------------------------\n");
+				printf("\n A) Mauna Kea\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n B) Dhaulagiri\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n C) Monte Chimborazo\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n D) Monte Everest\n");
+				printf("\n--------------------------\n");
+				Beep(som1, t3);
+
+				while(y <= 1){
+				if(_kbhit()){
+				tecla = getch();
+	    		}		
+				if(tecla == 'd' || tecla == 'D'){									
+				system("cls");
+				printf("\n \\/ Altenativa certa: D) Monte Everest \\/\n");
+				p2=1;
+				somV();
+				system("pause");
+				y = 3;
+				
+				}else if((tecla >= 65 && tecla <= 68) || (tecla >= 97 && tecla <= 100)){
+				system("cls");
+				
+				if(tecla == 'a' || tecla == 'A'){
+					pl_2[i2] = pl_2[0];	
+				}if(tecla == 'b' || tecla == 'B'){
+					pl_2[i2] = pl_2[1];
+				}if(tecla == 'c' || tecla == 'C'){
+					pl_2[i2] = pl_2[2];
+				}if(tecla == 'd' || tecla == 'D'){
+					pl_2[i2] = pl_2[3];
+				}
+				printf("\n X Altenativa Errada X\n");
+				somD();
+				printf("\nAlternativa Certa: D) Monte Everest)\n");
+				
+				printf("\nEXPLICACAO : ");
+				for (int q = 0; exp2[q] != '\0'; q++) {
+   				putchar(exp2[q]);
+  				for (int j = 0; j < 2000000; j++);
+ 	  	  	  	  }
+ 	  	  	    printf("\n\n");
+ 	    		system("pause");
+				y = 3;
+					
+				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){
+					system("cls");
+					printf("\n\n   INVALIDO\n\n");
+					
+					t1 = 0;	
+ 	 		   	  	t2 = 0; 
+				 	t3	= 0;
+				 	som1 = 0;
+					quests[indice] == quests[1];
+					y = 2;
+					
+				}
+			
+				}
+				}		
+				}//FIM PERGUNTA 2
+				
+				if(quests[indice] == quests[2]){//PERGUNTA 3
+					int t1 = 200, t2 = 5000000, t3 = 50, som1 = 700;
+					int y = 0;
+					while(y <= 2){
+					y = NULL;	
+					system("cls");
+					tecla = NULL;
+						
+					for (int q = 0; perg3[q] != '\0'; q++) {
+   					putchar(perg3[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    
+	  	    	printf("\n--------------------------\n");
+				printf("\n A) Colombia\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n B) Peru\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n C) China\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n D) Bolivia\n");
+				printf("\n--------------------------\n");
+				Beep(som1, t3);
+				
+				
+				while(y <= 1){
+				if(_kbhit()){
+				tecla = getch();
+	    		}	
+					
+				if(tecla == 'b' || tecla == 'B'){									
+				system("cls");
+				printf("\n \\/ Altenativa certa: B)PERU \\/\n");
+				p3=1;
+				somV();
+				system("pause");
+				y = 3;
+				system("cls");
+				}else if((tecla >= 65 && tecla <= 68) || (tecla >= 97 && tecla <= 100)){
+				system("cls");
+				
+				if(tecla == 'a' || tecla == 'A'){
+					pl_3[i3] = pl_3[0];	
+				}if(tecla == 'b' || tecla == 'B'){
+					pl_3[i3] = pl_3[1];
+				}if(tecla == 'c' || tecla == 'C'){
+					pl_3[i3] = pl_3[2];
+				}if(tecla == 'd' || tecla == 'D'){
+					pl_3[i3] = pl_3[3];
+				}
+				printf("\n X Altenativa Errada X\n");
+				somD();
+				printf("Alternativa Certa: B)Peru");
+				
+				printf("\nEXPLICACAO : ");
+				for (int q = 0; exp3[q] != '\0'; q++) {
+   				putchar(exp3[q]);
+  				for (int j = 0; j < 2000000; j++);
+					}
+ 	  	  	    printf("\n\n");
+				system("pause");
+				y = 3;
+				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){
+					system("cls");
+					printf("\n\n   INVALIDO\n\n");
+					
+					t1 = 0;	
+ 	 		   	  	t2 = 0; 
+				 	t3	= 0;
+				 	som1 = 0;
+					quests[indice] == quests[2];
+					y = 2;
+				}
+				 	
+				}
+				}
+				}//FIM PERGUNTA 3
+				
+				if(quests[indice] == quests[3]){//PERGUNTA 4
+					int t1 = 200, t2 = 5000000, t3 = 50, som1 = 700;
+					int y = 0;
+					while(y <= 2){
+					y = NULL;
+					tecla = NULL;	
+					system("cls");
+					
+					for (int q = 0; perg4[q] != '\0'; q++) {
+   					putchar(perg4[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    
+	  	    	printf("\n--------------------------\n");
+				printf("\n A) Graham Bell\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n B) Steve Jobs\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n C) Thomas Edison\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n D) Henry Ford\n");
+				printf("\n--------------------------\n");
+				Beep(som1, t3);
+				
+				while(y <= 1){	
+				
+				if(_kbhit()){
+				tecla = getch();
+	    		}
+	    		
+				if(tecla == 'c' || tecla == 'C'){									
+				system("cls");
+				printf("\n \\/ Altenativa certa: C)Thomas Edison \\/\n");
+				p4=1;
+				somV();
+				system("pause");
+				y = 3;
+				
+				system("cls");
+				
+				}else if((tecla >= 65 && tecla <= 68) || (tecla >= 97 && tecla <= 100)){
+				system("cls");
+				
+				if(tecla == 'a' || tecla == 'A'){
+					pl_4[i4] = pl_4[0];	
+				}if(tecla == 'b' || tecla == 'B'){
+					pl_4[i4] = pl_4[1];
+				}if(tecla == 'c' || tecla == 'C'){
+					pl_4[i4] = pl_4[2];
+				}if(tecla == 'd' || tecla == 'D'){
+					pl_4[i4] = pl_4[3];
+				}
+				printf("\n X Altenativa Errada X\n");
+				somD();
+				printf("\nAlternativa Certa: C)Thomas Edison\n");
+			
+				printf("\nEXPLICACAO : ");
+				for (int q = 0; exp4[q] != '\0'; q++) {
+   				putchar(exp4[q]);
+  				for (int j = 0; j < 2000000; j++);
+ 	  	  	  	  }
+ 	  	  	    printf("\n\n");
+				system("pause");
+				y = 3;
+					 
+				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){
+					system("cls");
+					printf("\n\n   INVALIDO\n\n");
+					
+					t1 = 0;	
+ 	 		   	  	t2 = 0; 
+				 	t3	= 0;
+				 	som1 = 0;
+					quests[indice] == quests[3];
+					y = 2;
+				}
+				}
+				}
+				}//FIM PERGUNTA 4	
+				
+				
+					
+		}//loop	
+		
+					if(total_c == 4){//PERGUNTA 5
+					int t1 = 200, t2 = 2000000, t3 = 50, som1 = 700;
+					int y = 0;
+					
+					
+					while(y <= 2){
+					y = NULL;
+					tecla = NULL;
+					system("cls");
+					printf("---ESPECIAL---\n");
+					
+					for (int q = 0; perg5[q] != '\0'; q++) {
+   					putchar(perg5[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    for (int q = 0; perg5_1[q] != '\0'; q++) {
+   					putchar(perg5_1[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    for (int q = 0; perg5_2[q] != '\0'; q++) {
+   					putchar(perg5_2[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    for (int q = 0; perg5_3[q] != '\0'; q++) {
+   					putchar(perg5_3[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    
+	  	    	printf("\n--------------------------\n");
+				printf("\n A) I\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n B) II\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n C) III\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n D) I e III.\n");
+				printf("\n--------------------------\n");
+				Beep(som1, t3);
+				
+				
+				while(y <= 1){
+				
+				if(_kbhit()){
+				tecla = getch();
+	    		}	
+					
+				if(tecla == 'd' || tecla == 'D'){									
+				system("cls");
+				printf("\n \\/ Altenativa certa: D) I e III \\/\n");
+				p5 = 1;
+				somV();
+				system("pause");
+				b = '1';
+				y = 3;
+				
+				}else if((tecla >= 65 && tecla <= 68) || (tecla >= 97 && tecla <= 100)){
+				system("cls");
+				if(tecla == 'a' || tecla == 'A'){
+					pl_5[i5] = pl_5[0];	
+				}if(tecla == 'b' || tecla == 'B'){
+					pl_5[i5] = pl_5[1];
+				}if(tecla == 'c' || tecla == 'C'){
+					pl_5[i5] = pl_5[2];
+				}if(tecla == 'd' || tecla == 'D'){
+					pl_5[i5] = pl_5[3];
+				}
+				
+				printf("\n X Altenativa Errada X\n");
+				somD();
+				printf("\nAlternativa Certa: D)I e III\n");
+			
+				printf("\nEXPLICACAO : ");
+				for (int q = 0; exp5[q] != '\0'; q++) {
+   				putchar(exp5[q]);
+  				for (int j = 0; j < 2000000; j++);
+ 	  	  	  	  }
+ 	  	  	    printf("\n\n");
+				system("pause");
+					b = '1';						
+					y = 3;
+				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){
+					system("cls");
+					printf("\n\n   INVALIDO\n\n");
+					
+					t1 = 0;	
+ 	 		   	  	t2 = 0; 
+				 	t3	= 0;
+				 	som1 = 0;
+					y = 2;
+				}
+				}
+				}
+				}//FIM PERGUNTA 5
+		
+		
+		}//fim das perguntas	
+		
+		
+			
+		if(b == '1'){//Tela Final
+			int y = 0;
+			system("cls");
+				
+			int o, o2;
+			printf("\n\n**RESULTADOS**");
+			
+			o = p1+p2+p3+p4+p5;
+			o2 = 20*o;
+		 	
+			printf("\n\nVoce Acertou: %d%% (%d/5 Questões)\n\n", o2, o);
+			
+			
+			for (int i = 0; i < 4; i++) {
+				
+				
+						
+				
+            if(quests[ordem[i]] == quests[ordem[0]]){//Primeira Questao
+			
+			printf("1 Questao");
+			switch(quests[ordem[0]]){
+				
+			case '1':
+				
+			if(p1 == 1){	
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	  		
+			printf(" \\/\nAlternativa Certa: A)Yuri Gagarin \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p1 == 0){
+				
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X\nAlternativa Marcada: %s\n", pl_1[i1]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: A)Yuri Gagarin");
+					
+			}
+				break;
+			
+			case '2':
+			
+			if(p2 == 1){		
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+			printf(" \\/\nAlternativa Certa: D)Monte Everest \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if (p2 == 0){
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X \nAlternativa Marcada: %s\n", pl_2[i2]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: D)Monte Everest");
+			}
+				break;
+			
+			case '3':
+				
+				if(p3 == 1){//  3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: B)Peru \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p3 == 0){//  se 3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X\nAlternativa Marcada: %s\n", pl_3[i3]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: B)Peru");	
+			}
+				break;
+			
+			case '4':
+				
+				if(p4 == 1){//   4
+		
+		    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: C)Thomas Edison \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			}else if(p4 == 0){// se 4
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X \nAlternativa Marcada: %s\n", pl_4[i4]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: C)Thomas Edison");
+			}
+				break;
+			
+			
+			}
+			
+			
+			}//primeira questao
+		
+		
+			if(quests[ordem[i]] == quests[ordem[1]]){//Segunda Questao
+			printf("\n2 Questao");
+			switch(quests[ordem[1]]){
+				
+			case '1':
+				
+			if(p1 == 1){	
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	  		
+			printf(" \\/\nAlternativa Certa: A)Yuri Gagarin \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p1 == 0){
+				
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X\nAlternativa Marcada: %s\n", pl_1[i1]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: A)Yuri Gagarin");
+					
+			}
+				break;
+			
+			case '2':
+			
+			if(p2 == 1){		
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+			printf(" \\/\nAlternativa Certa: D)Monte Everest \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if (p2 == 0){
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X \nAlternativa Marcada: %s\n", pl_2[i2]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: D)Monte Everest");
+			}
+				break;
+			
+			case '3':
+				
+				if(p3 == 1){//  3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: B)Peru \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p3 == 0){//  se 3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X\nAlternativa Marcada: %s\n", pl_3[i3]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: B)Peru");	
+			}
+				break;
+			
+			case '4':
+				
+				if(p4 == 1){//   4
+		
+		    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: C)Thomas Edison \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			}else if(p4 == 0){// se 4
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X \nAlternativa Marcada: %s\n", pl_4[i4]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: C)Thomas Edison");
+			}
+				break;
+			
+			
+			}
+			
+			
+			}//segunda questao
+			
+			
+			
+			if(quests[ordem[i]] == quests[ordem[2]]){//Terceira Questao
+			
+			printf("\n\n3 Questao");		
+			switch(quests[ordem[2]]){
+				
+			case '1':
+				
+			if(p1 == 1){	
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	  		
+			printf(" \\/\nAlternativa Certa: A)Yuri Gagarin \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p1 == 0){
+				
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X\nAlternativa Marcada: %s\n", pl_1[i1]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: A)Yuri Gagarin");
+					
+			}
+				break;
+			
+			case '2':
+			
+			if(p2 == 1){		
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+			printf(" \\/\nAlternativa Certa: D)Monte Everest \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if (p2 == 0){
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X \nAlternativa Marcada: %s\n", pl_2[i2]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: D)Monte Everest");
+			}
+				break;
+			
+			case '3':
+				
+				if(p3 == 1){//  3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: B)Peru \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p3 == 0){//  se 3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X\nAlternativa Marcada: %s\n", pl_3[i3]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: B)Peru");	
+			}
+				break;
+			
+			case '4':
+				
+				if(p4 == 1){//   4
+		
+		    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: C)Thomas Edison \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			}else if(p4 == 0){// se 4
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X \nAlternativa Marcada: %s\n", pl_4[i4]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: C)Thomas Edison");
+			}
+				break;
+			
+			
+			}
+			
+			
+			}//terceira questao
+			
+			
+			
+			if(quests[ordem[i]] == quests[ordem[3]]){//Quarta Questao
+			
+			printf("\n\n4 Questao");
+			switch(quests[ordem[3]]){
+				
+			case '1':
+				
+			if(p1 == 1){	
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	  		
+			printf(" \\/\nAlternativa Certa: A)Yuri Gagarin \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p1 == 0){
+				
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X\nAlternativa Marcada: %s\n", pl_1[i1]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: A)Yuri Gagarin");
+					
+			}
+				break;
+			
+			case '2':
+			
+			if(p2 == 1){		
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+			printf(" \\/\nAlternativa Certa: D)Monte Everest \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if (p2 == 0){
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X \nAlternativa Marcada: %s\n", pl_2[i2]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: D)Monte Everest");
+			}
+				break;
+			
+			case '3':
+				
+				if(p3 == 1){//  3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: B)Peru \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p3 == 0){//  se 3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X\nAlternativa Marcada: %s\n", pl_3[i3]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: B)Peru");	
+			}
+				break;
+			
+			case '4':
+				
+				if(p4 == 1){//   4
+		
+		    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: C)Thomas Edison \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			}else if(p4 == 0){// se 4
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X \nAlternativa Marcada: %s\n", pl_4[i4]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: C)Thomas Edison");
+			}
+				break;
+			
+			}
+			
+			}//quarta questao
+			
+			
+			}//for
+			
+			
+			if(p5 == 1){//  5
+			printf("\n\n5 Questao");
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: D)I e III \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			}else if(p5 == 0){//  se 5
+				printf("\n\n5 Questao");	
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X \nAlternativa Marcada: %s\n", pl_5[i5]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: D)I e III");
+			}
+			
+			
+			
+			
+			while(y <= 1){
+			printf("\n\n1 -Tente Novamente\n");
+			printf("2 - Menu ");
+			while(y <= 2){
+			if(_kbhit()){
+				tecla = getch();
+	    		}
+	    		if(tecla == '1'){
+					rep = 1;
+					y = 3;
+				}
+	    		if(tecla == '2'){
+					rep = 0;
+					a = '1'; 
+					y = 3;
+				}	
+				}
+			}
+			
+			
+		}//tela final		
+			
+
+}//jogo 1 fim
+		
+		
+	
+
+	int lobbyjogo2(){//jogo2 inicio
+	
+	int b=0,bf=0,cor,cor2,cor3,cor4;
+	while(bf <= 3){	
+	char tela[7][18];
+	char tecla;
+	int player1T, player2T;
+	char player = 0, player2 = 2;
+	int px = 5, py = 7,px2 = 5, py2 = 9, portax = 6, portay = 8;
+	int r = 0, x, y, fundo = 32;
+	char caixa = 219;
+	char porta = 238;
+	int chap = 220;
+	int mudarpers = 178;
+	int ponteiro = 0, ponteiro2 = 0;
+	char caixaC, cima = '_';
+	int bloq1 = 0, bloq2 = 0, bloqcolor = 0, bloqcolor2 = 0;
+	int up = 72, down = 80, left = 75, right = 77; 
+	int sair = 0;
+	int confirmacao = 0;
+	int pont = 0;
+	int pont2 = 0;
+	person = 7;
+	person2 = 7;
+	
+	
+	
+		
+	 while(bf <= 3){
+	 	bf=0;
+	 	b=0;
+		
+		 if(naveg < 0){
+		naveg = 2;
+		}else if(naveg > 2){
+		naveg = 0;
+		}
+			char *b1[4] = {"\n**Cobra Na Caixa**", "PLAY", "DESCRICAO", "VOLTAR"};
+    	switch(naveg){
+		
+	case 0:		   		   
+	cor = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;	
+	cor2 = 7;
+	cor3 = 7;	
+	break;	
+	
+	case 1:
+	cor = 7;	
+	cor2 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	cor3 = 7;		
+	break;
+	    
+	case 2:
+	cor = 7;		
+	cor2 = 7;
+	cor3 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	break;	
+	
+	}
+	
+		system("cls");	
+		printf("%s\n", b1[0]);
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor);
+		printf("    %s    ", b1[1]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor2);
+		printf("  %s " , b1[2]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor3);
+		printf("   %s   ", b1[3]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		SetConsoleTextAttribute(hConsole, 7);
+		
+		
+		while(bf <= 1){
+		tecla = NULL;	
+		if(_kbhit()){
+		tecla = getch();
+	    }	
+	    
+	    if(tecla == 'w'){
+			naveg--;
+		 	bf = 2;
+		}if(tecla == 's'){
+			naveg++;
+			bf = 2;
+			
+		}
+		if(naveg == 0 && tecla == 13){
+			b = 1;
+			bf = 4;
+		}
+		if(naveg == 1 && tecla == 13){
+			b = 2;
+			bf = 3;
+		}
+		if(naveg == 2 && tecla == 13){
+			
+			a = 0;
+			c =0;
+			b = 3;
+			bf = 3;
+		}
+		
+	
+		}
+		
+		
+		
+		
+		
+		
+		if(b == 2){//REGRAS
+		naveg=0;	
+		tecla=NULL;
+		bf=0;
+		system("cls");
+		
+		 while(bf <= 2){
+	 	bf=0;
+		
+		 if(naveg < 0){
+		naveg = 2;
+		}else if(naveg > 2){
+		naveg = 0;
+		}
+			char *b1[3] = {"**Descricao**", "Voltar", "Menu Principal"};
+    	switch(naveg){
+		
+	case 0:		   		   
+	cor = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;	
+	cor2 = 7;
+	cor3 = 7;	
+	break;	
+	
+	case 1:
+	cor = 7;	
+	cor2 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	cor3 = 7;		
+	break;
+	    	
+	
+	}
+	
+		system("cls");	
+		printf("\n\n                      %s\n", b1[0]);
+		SetConsoleTextAttribute(hConsole, 15);
+		printf("\n\n No jogo Cobra Na Caixa dois exploradores se aventuram em uma \n tumba egipcia e acabam ficando presos, nesta tumba a 5 caixas \n e em uma delas contem o botao que podera abrir a porta, enquanto\n uma outra esconde uma cobra mortal.");
+		SetConsoleTextAttribute(hConsole, 2);
+		printf("\n( A cada inicio de rodada, o local do botao \n e da cobra mudam de caixa de forma aleatoria )\n\n");	  		
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor);
+		printf("      %s      ", b1[1]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor2);
+		printf("  %s  " , b1[2]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		
+		while(bf <= 0){
+		tecla = NULL;	
+		if(_kbhit()){
+		tecla = getch();
+	    }	
+	    
+	    if(tecla == 'w'){
+			naveg--;
+		 	bf = 2;
+		}if(tecla == 's'){
+			naveg++;
+			bf = 2;
+			
+		}
+		if(naveg == 0 && tecla == 13){//voltar uma tela
+		bf = 3;
+		b = 0;
+		}
+		if(naveg == 1 && tecla == 13){//voltar menu principal
+		a = 0;
+		c =0;
+		b = 3;
+		bf = 3;	
+		}
+		
+		
+		
+		}}	
+				
+			}//REGRAS
+			
+		
+		if(b == 3){//voltar menu
+			a = NULL;
+
+			Beep(300, 50);
+			naveg = 0;
+			b = 0;
+			bf = 4;
+		}	
+			
+			
+		
+		}
+		
+	
+			
+	if(b == 1){	
+	tecla='p';
+	if(1){
+		system("cls");
+		printf("\n\n     -CARREGANDO-\n ");
+		for(int j = 0;j<20;j++){
+			SetConsoleTextAttribute(hConsole, 112);
+			printf(" ");
+			SetConsoleTextAttribute(hConsole, 7);
+			if(j == 19){
+				system("cls");
+				printf("\n\n    -JOGO PRONTO-\n ");
+				SetConsoleTextAttribute(hConsole, 32);
+				printf("                    ");
+				SetConsoleTextAttribute(hConsole, 7);
+				
+			}	
+			Sleep(25);
+		}
+		
+		Sleep(1000);
+	}
+	
+	for (x = 0; x < 7; x++) {
+    for (y = 0; y < 18; y++) {	
+	tela[x][y];
+	
+	}}
+	
+	
+	do{	
+			
+	while(r <= 0){//loop1
+			
+	tela[px][py] = player;	
+	tela[portax][portay] = porta; 
+	tela[px2][py2] = player2;
+		
+	for (x = 0; x < 7; x++) {
+    for (y = 0; y < 18; y++) {
+    	
+    			
+
+	
+if(tela[x][y] == porta){
+    SetConsoleTextAttribute(hConsole,0 | 7);
+	printf("%c", tela[x][y]);
+	SetConsoleTextAttribute(hConsole, 7);
+	}	
+	
+	else if(tela[x][y] == player2){			
+    SetConsoleTextAttribute(hConsole,person2);
+	printf("%c", tela[x][y] = 223);
+	SetConsoleTextAttribute(hConsole, 7);
+	}
+	else if(tela[x][y] == player){			
+    SetConsoleTextAttribute(hConsole,person);
+	printf("%c", tela[x][y] = 223);
+	SetConsoleTextAttribute(hConsole, 7);
+	}
+	
+	
+	
+	else{
+	SetConsoleTextAttribute(hConsole,128);
+	printf("%c", tela[x][y]);	
+	SetConsoleTextAttribute(hConsole,7);
+	}	
+	
+	tela[x][y] = fundo;
+	//mudar person 1
+	tela[1][4] = '|';
+	tela[1][6] = '|';
+	tela[2][4] = 192;
+	tela[2][6] = 217;
+	tela[0][5] = cima;
+	tela[2][5] = 205;
+	//mudar person 1
+	//mudar person 2
+	tela[1][10] = '|';
+	tela[1][12] = '|';
+	tela[2][10] = 192;
+	tela[2][12] = 217;
+	tela[0][11] = cima;
+	tela[2][11] = 205;
+	//mudar person 2
+			
+			
+	}
+	printf("\n");
+	}
+	
+	r = 1; 	
+		
+	}//loop1
+	
+	
+	//Condiçao para aparecer CABINE
+	if(fase == 0 && (px == 3 && py == 5) && (px2 == 3 && py2 == 11)){
+		SetConsoleTextAttribute(hConsole,15 | 128);
+		printf("\nPLAYER 1/PLAYER 2 \n");
+		printf("   [ CABINE ]     ");
+		SetConsoleTextAttribute(hConsole,4 | 112);
+		printf("\n---PRESSIONE E----\n");
+		SetConsoleTextAttribute(hConsole,15 | 128);
+		printf("     ENTRAR       \n");
+		SetConsoleTextAttribute(hConsole,7);	
+	}
+	else if(fase == 0 && (px2 == 3 && py2 == 5) && (px == 3 && py == 11)){
+		SetConsoleTextAttribute(hConsole,128);
+		printf("\nPLAYER 1/PLAYER 2 \n");
+		printf("   [ CABINE ]     ");
+		SetConsoleTextAttribute(hConsole,4 | 128);
+		printf("\n---PRESSIONE E----\n");
+		SetConsoleTextAttribute(hConsole,128);
+		printf("     ENTRAR       \n");
+		SetConsoleTextAttribute(hConsole,7);	
+	}
+	
+	else if(fase == 0 &&  (px2 == 3 && (py2 == 5 || py2 == 11))){
+		SetConsoleTextAttribute(hConsole,15 | 128);
+		printf("\n    PLAYER 2      \n");
+		printf("                  \n");
+		printf("   [ CABINE ]     ");
+		SetConsoleTextAttribute(hConsole,4 |112);
+		printf("\n      1/2         \n");
+		SetConsoleTextAttribute(hConsole,7);	
+	}
+	else if(fase == 0 &&  (px == 3 && (py == 5 || py == 11)) != (px2 == 3 && py2 == 11)){
+		SetConsoleTextAttribute(hConsole,15 | 128);
+		printf("\n    PLAYER 1      \n");
+		printf("                  \n");
+		printf("   [ CABINE ]     ");
+		SetConsoleTextAttribute(hConsole,4 |112);
+		printf("\n      1/2         \n");
+		SetConsoleTextAttribute(hConsole,7);	
+	}
+	//Condiçao para aparecer CABINE
+
+	//Condiçao para aparecer PORTA
+	if(fase == 0 && ((px >= 5 && px <= 6) && (py >= 7 && py <= 9) && (px2 >= 5 && px2 <= 6) && (py2 >= 7 && py2 <= 9))){
+		SetConsoleTextAttribute(hConsole,15 | 128);
+		printf("\nPLAYER 1/PLAYER 2 \n");
+		printf("   [  PORTA  ]    ");
+		SetConsoleTextAttribute(hConsole,4 | 112);
+		printf("\n---PRESSIONE E----\n");
+		SetConsoleTextAttribute(hConsole, 15 |128);
+		printf("      SAIR        \n");
+		SetConsoleTextAttribute(hConsole,7);
+		if(tecla == 'e'){
+			printf("Confirmar[enter]");
+			sair = 1;
+		
+		}
+		if(sair == 1 && tecla == 13){
+			break;
+		}else{
+		sair = 0;
+		}	
+	}
+	else if(fase == 0 && (px2 == 5 || px2 == 6) && (py2 >= 7 && py2 <= 9)){
+		SetConsoleTextAttribute(hConsole,15 | 128);
+		printf("\n    PLAYER 2      \n");
+		printf("                  \n");
+		printf("   [  PORTA  ]    ");
+		SetConsoleTextAttribute(hConsole,4 |112);
+		printf("\n      1/2         \n");
+		SetConsoleTextAttribute(hConsole,7);
+			
+	}
+	else if(fase == 0 && (px == 5 || px == 6) && (py >= 7 && py <= 9)){
+		SetConsoleTextAttribute(hConsole,15 | 128);
+		printf("\n    PLAYER 1      \n");
+		printf("                  \n");
+		printf("   [  PORTA  ]    ");
+		SetConsoleTextAttribute(hConsole,4 |112);
+		printf("\n      1/2         \n");
+		SetConsoleTextAttribute(hConsole,7);		
+	}
+	//Condiçao para aparecer PORTA
+	if(fase == 0 && (px == 1 && px2 == 1) && ((py == 5 || py == 11) && (py2 == 5 || py2 == 11))){//Maquina
+		if(pont < 0){
+			tecla = NULL;
+			pont = 0;
+		} 
+		//person 1
+		SetConsoleTextAttribute(hConsole, 128 | 14);
+		printf("\nEscolha Seu  \nPERSONAGEM:  \n");
+		printf("             \n");
+		
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		
+		printf(" Jose      ");
+		SetConsoleTextAttribute(hConsole, 112 | 0);
+		printf("%c", chap);
+		SetConsoleTextAttribute(hConsole, 128);
+	   	printf(" ");
+		//person 1
+		//ponteiro 1
+		if(pont == 1){//mudar
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq1 = 2;
+			
+		}
+		else if(ponteiro == 0){//mudar
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P1");
+		
+		}
+		//ponteiro 1
+		//ponteiro 2
+		
+		 if(pont2 == 1){
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq2 = 2;
+			
+		}
+		else if(ponteiro2 == 0){
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P2");
+		
+		}	
+		//ponteiro 2
+		//person 2
+		printf("\n");
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		printf("             \n");
+		printf(" Arthur    ");
+		SetConsoleTextAttribute(hConsole, 32 | 0);
+		printf("%c", chap);
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		printf(" ");
+		//person 2
+		//ponteiro 1
+		 if(pont == 2){
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq1 = 2;
+			
+		}
+		else if(ponteiro == 1){
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P1");
+		
+		}
+		//ponteiro 1
+		//ponteiro 2 
+		 if(pont2 == 2){//mudar
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq2 = 2;
+			
+		}
+		else if(ponteiro2 == 1){//mudar
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P2");
+		
+		}
+		//ponteiro 2
+		//person 3
+		printf("\n");
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		printf("             \n");
+		printf(" Davi      ");
+		SetConsoleTextAttribute(hConsole,16 | 0);
+		printf("%c", chap);
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		printf(" ");
+		//person 3
+		
+		//ponteiro 1
+		if(pont == 3){
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq1 = 2;
+			
+		}
+		else if(ponteiro == 2){
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P1");
+		}
+		//ponteiro 1
+		//ponteiro 2
+		
+		 if(pont2 == 3){//mudar
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq2 = 2;
+			
+		}
+		else if(ponteiro2 == 2){//mudar
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P2");
+		
+		}
+		
+		//ponteiro 2
+		
+		//person 4
+		printf("\n");
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		printf("             \n");
+		printf(" Beatriz   ");
+		SetConsoleTextAttribute(hConsole, 80 | 0);
+		printf("%c", chap);
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		printf(" ");
+		//person 4
+		//ponteiro 1
+		
+		if(pont == 4){
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq1 = 2;
+			
+		}
+		else if(ponteiro == 3){
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P1");
+		
+		}
+		
+		//ponteiro 1
+		//ponteiro 2
+		
+		 if(pont2 == 4){
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq2 = 2;
+			
+		}
+		else if(ponteiro2 == 3){
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P2");
+		
+		}
+		
+		//ponteiro 2
+		//person 5
+		printf("\n");
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		printf("             \n");
+		printf(" Henry     ");
+		SetConsoleTextAttribute(hConsole, 64 | 0);
+		printf("%c", chap);
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		printf(" ");
+		//person 5
+		//ponteiro 1
+		
+		if(pont == 5){//mudar
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq1 = 2;
+			
+		}
+		else if(ponteiro == 4){//mudar
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P1");
+		
+		}
+		
+		//ponteiro 1
+		//ponteiro 2
+		
+		 if(pont2 == 5){//mudar
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq2 = 2;
+			
+		}
+		else if(ponteiro2 == 4){//mudar
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P2");
+		
+		}
+		
+		//ponteiro 2
+		printf("\n");
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		printf("             \n");
+		printf(" Cleber    ");
+		SetConsoleTextAttribute(hConsole, 0 | 0);
+		printf("%c", chap);
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		printf(" ");
+		//ponteiro 1
+		
+		if(pont == 6){//mudar
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq1 = 2;
+			
+		}
+		else if(ponteiro == 5){//mudar
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P1");
+		
+		}
+		
+		//ponteiro 1
+		//ponteiro 2
+		
+		 if(pont2 == 6){//mudar
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq2 = 2;
+			
+		}
+		else if(ponteiro2 == 5){//mudar
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P2");
+		
+		}
+		
+		//ponteiro 2
+		printf("\n");
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		printf("             \n");
+		printf(" Geovanna  ");
+		SetConsoleTextAttribute(hConsole, 96 | 0);
+		printf("%c", chap);
+		SetConsoleTextAttribute(hConsole, 128 | 15);
+		printf(" ");
+		//ponteiro 1
+		
+		if(pont == 7){//mudar
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq1 = 2;
+			
+		}
+		else if(ponteiro == 6){//mudar
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P1");
+		
+		}
+		
+		//ponteiro 1
+		//ponteiro 2
+		
+		 if(pont2 == 7){//mudar
+		SetConsoleTextAttribute(hConsole, 7);	
+			printf("[ SELECIONADO ]");
+			bloq2 = 2;
+			
+		}
+		else if(ponteiro2 == 6){//mudar
+		SetConsoleTextAttribute(hConsole, 7);
+		printf(" << P2");
+		
+		}
+		
+		//ponteiro 2
+		printf("\n");
+		if(confirmacao == 0){
+			SetConsoleTextAttribute(hConsole, 0 | 15);
+			printf("  Pressione\n P1:[E]Pronto\n P2:[K]Pronto\n");
+			SetConsoleTextAttribute(hConsole, 4 |112);
+			printf("  JOGADORES  \n PRONTOS 0/2 ");
+			SetConsoleTextAttribute(hConsole, 7);
+		}else if(confirmacao == 1){
+			SetConsoleTextAttribute(hConsole, 0 | 15);
+			printf("  Pressione\n P1:[E]Pronto\n P2:[K]Pronto\n");
+			SetConsoleTextAttribute(hConsole, 4 |112);
+			printf("  JOGADORES  \n PRONTOS 1/2 ");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+		} if(confirmacao == 2){
+			SetConsoleTextAttribute(hConsole, 0 | 15);
+			printf(" JOGADORES  \n  PRONTOS    ");
+			SetConsoleTextAttribute(hConsole, 0 |112);
+			printf("\n  PRESSIONE  ");
+			SetConsoleTextAttribute(hConsole, 2 |112);
+			printf("\n   ENTER     ");
+			SetConsoleTextAttribute(hConsole, 0 |112);
+			printf("\nPARA COMECAR ");
+			SetConsoleTextAttribute(hConsole, 7);
+			if(tecla == 13){
+			fase = 1;
+			r=0;
+			break;
+		}
+		}
+		SetConsoleTextAttribute(hConsole, 7);
+		SetConsoleTextAttribute(hConsole, 11);
+		printf("\nCIMA:[w]/[seta cima]");
+		SetConsoleTextAttribute(hConsole, 0 | 112);
+		printf(" | ");
+		SetConsoleTextAttribute(hConsole, 12);
+		printf("BAIXO:[s]/[seta baixo]");
+	}//fim maquina
+	
+	
+	
+	while(r >= 1){//loop	
+				
+	if(tecla == 'p'){
+		r = 0;
+	}
+	
+		tecla = NULL;
+	if(_kbhit()){
+		tecla = getch();
+		}
+		
+		if(tecla == 'W' || tecla == 'A' || tecla == 'S' || tecla == 'D' || tecla == 'E'){
+			system("cls");
+			printf("\n       * AVISO *");
+			printf("\n\n[ DESATIVE O CAPSLOCK ] ");
+		}
+		
+		
+			if(tecla == 'w' && px == 3 && (py >= 10 && py <= 12)){
+		px++;	
+		}if(tecla == 'a' && (px >=0 && px <=2) && py == 13){
+		py++;	
+		}if(tecla == 'd' && (px >=0 && px <=2) && py == 9){
+		py--;	
+		}
+	
+	if(fase == 0 && (px >= 0 && px <= 6) && (py >= 0 && py <= 17)){//OBSTACULOS
+		//MAQUINA 1 PERSON
+		//p1
+		if(tecla == 'w' && px == 3 && (py >= 4 && py <= 6)){
+		px++;	
+		}if(tecla == 'a' && (px >=0 && px <=2) && py == 7){
+		py++;	
+		}if(tecla == 'd' && (px >=0 && px <=2) && py == 3){
+		py--;	
+		}
+		//p1
+		//p2
+		if(tecla == up && px2 == 3 && (py2 >= 4 && py2 <= 6)){
+		px2++;	
+		}if(tecla == left && (px2 >=0 && px2 <=2) && py2 == 7){
+		py2++;	
+		}if(tecla == right && (px2 >=0 && px2 <=2) && py2 == 3){
+		py2--;	
+		}
+		//p2
+		//MAQUINA 1 PERSON
+		//MAQUINA 2 PERSON
+		//p1
+		if(tecla == 'w' && px == 3 && (py >= 10 && py <= 12)){
+		px++;	
+		}if(tecla == 'a' && (px >=0 && px <=2) && py == 13){
+		py++;	
+		}if(tecla == 'd' && (px >=0 && px <=2) && py == 9){
+		py--;	
+		}
+		//p1
+		//p2
+		if(tecla == up && px2 == 3 && (py2 >= 10 && py2 <= 12)){
+		px2++;	
+		}if(tecla == left && (px2 >=0 && px2 <=2) && py2 == 13){
+		py2++;	
+		}if(tecla == right && ((px2 >=0 && px2 <=2) && py2 == 9)){
+		py2--;	
+		}
+		//p2
+		//MAQUINA 2 PERSON
+		//PORTA
+		if(tecla == 's' && px == 5 && py == 8){
+		px--;	
+		}if(tecla == 'd' && px == 6 && py == 7){
+		py--;	
+		}if(tecla == 'a' && px == 6 && py == 9){
+		py++;	
+		}
+		
+		if(tecla == down && px2 == 5 && py2 == 8){
+		px2--;	
+		}if(tecla == right && px2 == 6 && py2 == 7){
+		py2--;	
+		}if(tecla == left && px2 == 6 && py2 == 9){
+		py2++;	
+		}
+		//PORTA
+		//LIMITE DO MAPA
+		if(tecla == 'w' && px == 0 && (py >= 0 && py <= 17)){
+		px++;	
+		}if(tecla == 'a' && (px >= 0 && px <= 6) && py == 0){
+		py++;	
+		}if(tecla == 's' && px == 6 && (py >= 0 && py <= 17)){
+		px--;	
+		}if(tecla == 'd' && (px >= 0 && px <= 6) && py == 17){
+		py--;	
+		}
+		
+		if(tecla == up && px2 == 0 && (py2 >= 0 && py2 <= 17)){
+		px2++;	
+		}if(tecla == left && (px2 >= 0 && px2 <= 6) && py2 == 0){
+		py2++;	
+		}if(tecla == down && px2 == 6 && (py2 >= 0 && py2 <= 17)){
+		px2--;	
+		}if(tecla == right && (px2 >= 0 && px2 <= 6) && py2 == 17){
+		py2--;	
+		}
+		//LIMITE DO MAPA
+														
+	}//FIM OBSTACULOS
+	
+	//teclas player 1
+	
+	
+	
+	if(bloq1 < 1 && tecla == 'w'){
+		px--;
+		r = 0;
+	}if(bloq1 < 1 && tecla == 's'){
+		px++;
+		r = 0;
+	}if(bloq1 < 1 && tecla == 'a'){
+		py--;
+		r = 0;
+	}if(bloq1 < 1 && tecla == 'd'){
+		py++;
+		r = 0;
+	}if(tecla == 'e'){
+		r = 0;
+	}if(tecla == 13){
+		r=0;
+	}
+	
+	//teclas player 1
+	//teclas player 2
+	if(bloq2 < 1 && tecla == up){//cima
+		px2--;
+		r = 0;
+	}if(bloq2 < 1 && tecla == down){//baixo
+		px2++;
+		r = 0;
+	}if(bloq2 < 1 && tecla == left){//esquerda
+		py2--;
+		r = 0;
+	}if(bloq2 < 1 && tecla == right){//direita
+		py2++;
+		r = 0;
+	}if(tecla == 'k' ){
+		r = 0;
+	}
+	
+	
+	//teclas player 2
+	//personagens
+	if(fase == 0 && ((px == 1 && px2 == 1) && (py == 5 && py2 == 11))){
+		tecla == NULL;
+		//ponteiros
+		if(bloq1 < 2 && tecla == 'w'){
+		ponteiro--;	
+		r = 0;
+		}if(bloq1 < 2 && tecla == 's'){
+		ponteiro++;
+		r = 0;	
+		}
+		
+		if(bloq2 < 2 && tecla == up){
+		ponteiro2--;	
+		r = 0;
+		}if(bloq2 < 2 && tecla == down){
+		ponteiro2++;
+		r = 0;	
+		}
+		
+		//SELECIONADO P1/P2
+			//1 de cada vez
+			
+			if(ponteiro == ponteiro2){
+				if(tecla == up){
+				ponteiro2--;	
+				}if(tecla == down){
+				ponteiro2++;	
+				}
+				if(tecla == 'w'){
+					ponteiro--;
+				}if(tecla == 's'){
+					ponteiro++;
+				}	
+			}
+			
+			//1 de cada vez
+			
+			//limite
+			if(ponteiro < 0){
+				ponteiro++;
+			}if(ponteiro2 < 0){
+				ponteiro2++;
+			}if(ponteiro > 6){
+				ponteiro--;
+			}if(ponteiro2 > 6){
+				ponteiro2--;
+			}
+			if(ponteiro <= 0 && ponteiro2 <= 0){
+				if(tecla == up){
+				ponteiro2++;	
+				}
+				if(tecla == 'w'){
+					ponteiro++;
+				}
+			}if(ponteiro >= 6 && ponteiro2 >= 6){
+				if(tecla == down){
+				ponteiro2--;	
+				}
+				if(tecla == 's'){
+					ponteiro--;
+				}
+			}
+			//limite
+			//selecao
+				// p1 marcou e dps p2
+				if(bloq1 == 2){	 			
+				if(bloq1 == 2 && confirmacao == 0){
+					confirmacao++;
+					r=0;	
+				}if(bloq2 == 2 && confirmacao == 1){
+					confirmacao++;
+					r=0;
+				}
+				
+				}
+				// p1 marcou e dps p2
+				//p2 marcou e dps p1
+				else if(bloq2 == 2){
+				if(bloq2 == 2 && confirmacao == 0){
+					confirmacao++;
+					r=0;
+				}if(bloq1 == 2 && confirmacao == 1){
+					confirmacao++;
+					r=0;
+				}
+				}
+				//p2 marcou e dps p1
+			//selecao
+		//SELECIONADO P1/P2
+		
+		//ponteiros	
+			
+			switch(ponteiro){
+		
+		case 0:
+			person = 7;//branco
+			if(ponteiro == 0){
+				if(tecla == 'e'){
+					pont=1;
+				}
+			}
+			break;	
+		case 1:
+			person = 2;//verde
+			if(ponteiro == 1){
+				if(tecla == 'e'){
+					pont=2;
+				}
+			}
+			break;
+		case 2:
+			person = 1;//azul
+			if(ponteiro == 2){
+				if(tecla == 'e'){
+					pont=3;
+				}
+			}
+			break;
+		case 3:
+			person = 5;//roxo
+			if(ponteiro == 3){
+				if(tecla == 'e'){
+					pont=4;
+				}
+			}
+			break;
+		case 4:
+			person = 4;//vermelho
+			if(ponteiro == 4){
+				if(tecla == 'e'){
+					pont=5;
+				}
+			}
+			break;
+		case 5:
+			person = 0;//preto
+			if(ponteiro == 5){
+				if(tecla == 'e'){
+					pont=6;
+				}
+			}
+			break;
+		case 6:
+			person = 6;//amarelo
+			if(ponteiro == 6){
+				if(tecla == 'e'){
+					pont=7;
+				}
+			}
+			break;
+		
+		}
+		
+		
+			switch(ponteiro2){
+		
+		case 0:
+			person2 = 7;//branco
+			if(tecla == 'k'){
+					pont2=1;
+				}
+			break;	
+		case 1:
+			person2 = 2;//verde
+			if(tecla == 'k'){
+					pont2=2;
+				}
+			break;
+		case 2:
+			person2 = 1;//azul
+			if(tecla == 'k'){
+					pont2=3;
+				}
+			break;
+		case 3:
+			person2 = 5;//roxo
+			if(tecla == 'k'){
+					pont2=4;
+				}
+			break;
+		case 4:
+			person2 = 4;//vermelho
+			if(tecla == 'k'){
+					pont2=5;
+				}
+			break;
+		case 5:
+			person2 = 0;//preto
+			if(tecla == 'k'){
+					pont2=6;
+				}
+			break;
+		case 6:
+			person2 = 6;//amarelo
+			if(tecla == 'k'){
+					pont2=7;
+				}
+			break;
+		
+		}
+		
+		
+	}//personagens
+	
+	if(tecla == 'e' && (px == 3 && py == 5 || py == 11) && (px2 == 3 && py2 == 11 || py2 == 5)){
+			px2-= 2;
+			px-= 2;
+			bloq1 = 1;
+			bloq2 = 1;
+			
+	}
+	
+	}//loop	
+		
+	system("cls");
+	
+	
+	}while(r <= 3);
+	
+	while(bf <= 4){
+	if(fase == 1){//game
+		
+		game2();	   	
+		
+	}
+	if(a == 0){
+	fase = 0;
+	naveg = 0;	
+	break;	
+	}
+	
+	}
+	
+	}
+	}
+	}//fim jogo 2
+	
+	
+	int sair(){
+		
+		while(re <= 1){
+			system("cls");
+			printf("\n\nSAINDO.\n\n", Beep(400, 10));
+			Sleep(200);
+			
+			system("cls");
+			printf("\n\nSAINDO..\n\n", Beep(400, 10));
+			Sleep(200);
+			
+			system("cls");
+			printf("\n\nSAINDO...\n\n", Beep(400, 10));
+			Sleep(200);
+			re++;
+		}
+			 xx = 1;
+		
+		
+		HWND hwnd = GetForegroundWindow();
+		
+		if (xx == 1) {
+        PostMessage(hwnd, WM_CLOSE, 0, 0);
+    	}
+    	
+	}
+	
+	
+	
+int game2(){
+	
+	
+	srand(time(NULL));
+	
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	char tela[7][18];
+	char tecla = 'p';
+	char player, player2;
+	int px = 5, py = 8, px2 = 5, py2 = 8,portax = 6, portay = 8;
+	int r = 0, x, y, fundo = 32;
+	char caixa = 219;
+	char porta = 238;
+	int vez =0;
+	int chapeu = 7, chap = 220;
+	int mudarch = 178;
+	char caixa1=1, caixa2=2, caixa3=3, caixa4=4;
+	int up = 72, down = 80, left = 75, right = 77;
+	int confirm = 0;
+	int caixaE1=0, caixaE2=0;
+	int p1caixa = NULL, p2caixa = NULL ;
+	int ii=0, ii2=0;
+	char *nome[20]={"Jose","Arthur","Davi","Beatriz","Henry","Cleber","Geovanna"}, 
+	*nome2[20]={"Jose","Arthur","Davi","Beatriz","Henry","Cleber","Geovanna"};
+	
+	vez = rand() % 2+1;
+	system("cls");
+	
+	if(person == 7){
+	nome[ii]=nome[0];
+	}else if(person == 2){
+		nome[ii]=nome[1];
+	}else if(person == 1){
+		nome[ii]=nome[2];
+	}else if(person == 5){
+		nome[ii]=nome[3];
+	}else if(person == 4){
+		nome[ii]=nome[4];
+	}else if(person == 0){
+		nome[ii]=nome[5];
+	}else if(person == 6){
+		nome[ii]=nome[6];
+	}
+	
+	if(person2 == 7){
+	nome2[ii2]=nome2[0];
+	}else if(person2 == 2){
+		nome2[ii2]=nome2[1];
+	}else if(person2 == 1){
+		nome2[ii2]=nome2[2];
+	}else if(person2 == 5){
+		nome2[ii2]=nome2[3];
+	}else if(person2 == 4){
+		nome2[ii2]=nome2[4];
+	}else if(person2 == 0){
+		nome2[ii2]=nome2[5];
+	}else if(person2 == 6){
+		nome2[ii2]=nome2[6];
+	}
+	
+	
+	if(vez == 1){	
+	printf("\nJogador(a) %s Comeca\n", nome[ii]);
+	
+	}
+	else if(vez == 2){
+	printf("\nJogador(a) %s Comeca\n", nome2[ii2]);
+	
+	}
+	system("pause");
+	
+	
+	for (x = 0; x < 7; x++) {
+    for (y = 0; y < 18; y++) {	
+	tela[x][y];
+	}}
+	
+	
+	
+	do{	
+	//troca de vez	
+	if(confirm == 0 && vez == 1){
+		px2=-1;
+		py2=-1;
+	}
+	if(confirm == 0 && vez == 2){
+		px=-1;
+		py=-1;	
+	}
+	if(confirm == 2 && vez == 1){
+	px=5;
+	py=8;
+	px2=-1;
+	py2=-1;	
+	confirm=0;
+	}
+	if(confirm == 1 && vez == 2){
+	px=-1;
+	py=-1;	
+	px2=5;
+	py2=8;	
+	confirm=0;
+	}
+		
+	
+	//troca de vez		
+	while(r <= 0){	
+		
+	tela[px][py] = player;	
+	tela[portax][portay] = porta;  	
+	tela[px2][py2] = player2;
+	
+	for (x = 0; x < 7; x++) {
+    for (y = 0; y < 18; y++) {
+    
+	for(int o=7; o <=9;o++){
+	
+	}	
+	for(int o=7; o <=9;o++){
+	tela[1][o] = caixa1;
+	}
+	tela[2][3] = caixa2;
+	tela[4][13] = caixa3;
+	tela[4][3] = caixa4;	
+	tela[2][13] = caixa;
+		
+	
+	
+	if(tela[x][y] == porta){//porta
+    SetConsoleTextAttribute(hConsole,0 | 7);
+	printf("%c", tela[x][y] = 238);
+	
+	}
+	
+	else if(tela[x][y] == caixa1){//caixa 1
+	if(caixaE1 == 0 || caixaE2 == 0){	
+	SetConsoleTextAttribute(hConsole, 0 );
+	}if(caixaE1 == 1){
+	SetConsoleTextAttribute(hConsole, person);	
+	}if(caixaE2 == 1){
+	SetConsoleTextAttribute(hConsole, person2);	
+	}
+	printf("%c", tela[x][y] = 223);	
+		
+	}
+	else if(tela[x][y] == caixa2){//caixa 2
+	if(caixaE1 == 0 || caixaE2 == 0){	
+	SetConsoleTextAttribute(hConsole, 0);
+	} if(caixaE1 == 2){
+	SetConsoleTextAttribute(hConsole, person | person*16);	
+	} if(caixaE2 == 2){
+	SetConsoleTextAttribute(hConsole, person2 | person2*16);	
+	}
+	printf("%c", tela[x][y] = 223);	
+		
+	}
+	else if(tela[x][y] == caixa3){//caixa 3
+	if(caixaE1 == 0 || caixaE2 == 0){	
+	SetConsoleTextAttribute(hConsole, 0);
+	} if(caixaE1 == 3){
+	SetConsoleTextAttribute(hConsole, person | person*16);	
+	} if(caixaE2 == 3){
+	SetConsoleTextAttribute(hConsole, person2 | person2*16);	
+	}
+	printf("%c", tela[x][y] = 223);	
+		
+	}
+	else if(tela[x][y] == caixa4){//caixa 4
+	if(caixaE1 == 0 || caixaE2 == 0){	
+	SetConsoleTextAttribute(hConsole, 0);
+	} if(caixaE1 == 4){
+	SetConsoleTextAttribute(hConsole, person | person*16);	
+	} if(caixaE2 == 4){
+	SetConsoleTextAttribute(hConsole, person2 | person2*16);	
+	}
+	printf("%c", tela[x][y] = 223);	
+		
+	}
+	else if(tela[x][y] == caixa){//caixa 5
+	if(caixaE1 == 0 || caixaE2 == 0){	
+	SetConsoleTextAttribute(hConsole, 0);
+	} if(caixaE1 == 5){
+	SetConsoleTextAttribute(hConsole, person | person*16);	
+	} if(caixaE2 == 5){
+	SetConsoleTextAttribute(hConsole, person2 | person2*16);	
+	}
+	printf("%c", tela[x][y] = 223);	
+		
+	}
+	
+	else if(tela[x][y] == player && vez == 1){//player 1			
+	SetConsoleTextAttribute(hConsole, person);
+	printf("%c", tela[x][y] = 223);
+	
+	}
+	else if(tela[x][y] == player2 && vez == 2){//player 2				
+	SetConsoleTextAttribute(hConsole, person2);
+	printf("%c", tela[x][y] = 223);
+	
+	}
+	
+	else{//tela
+	SetConsoleTextAttribute(hConsole,224 | 15);
+	printf("%c", tela[x][y]);	
+	SetConsoleTextAttribute(hConsole,7);
+	}
+	
+	
+	tela[x][y] = fundo;
+		
+	
+	}
+	printf("\n");
+	}
+	
+	r = 1;
+	
+	
+	
+	}	
+	
+
+	if((fase == 1 && px == 2 || px2 == 2) && ((py >= 7 && py <= 9) ||(py2 >= 7 && py2 <=9))){//caixa 1
+	
+		if(vez == 1){
+		printf("\n ABRIR CAIXA \n");
+		printf(" Press E \n");
+		}else if(vez == 2){
+		printf("\n ABRIR CAIXA \n");
+		printf(" Press K \n");	
+		}
+	
+	}else if(fase == 1 && (px == 2 && py == 4) || (px2 == 2 && py2 == 4)){//caixa 2
+		
+		if(vez == 1){
+		printf("\n ABRIR CAIXA \n");
+		printf(" Press E \n");
+		}else if(vez == 2){
+		printf("\n ABRIR CAIXA \n");
+		printf(" Press K \n");	
+		}
+		
+	}else if(fase == 1 && (px == 4 && py == 4) || (px2 == 4 && py2 == 4)){//caixa 4
+		
+		if(vez == 1){
+		printf("\n ABRIR CAIXA \n");
+		printf(" Press E \n");
+		}else if(vez == 2){
+		printf("\n ABRIR CAIXA \n");
+		printf(" Press K \n");	
+		}
+		
+	}else if(fase == 1 && (px == 2 && py == 12) || (px2 == 2 && py2 == 12)){//caixa 3
+		
+		if(vez == 1){
+		printf("\n ABRIR CAIXA \n");
+		printf(" Press E \n");
+		}else if(vez == 2){
+		printf("\n ABRIR CAIXA \n");
+		printf(" Press K \n");	
+		}
+		
+	}else if(fase == 1 && (px == 4 && py == 12) || (px2 == 4 && py2 == 12)){//caixa 5
+		
+		if(vez == 1){
+		printf("\n ABRIR CAIXA \n");
+		printf(" Press E \n");
+		}else if(vez == 2){
+		printf("\n ABRIR CAIXA \n");
+		printf(" Press K \n");	
+		}
+		
+	}
+	
+	
+	//fim caixa	
+	
+	if(fase == 1 && ((px >= 5 && px <= 6) || (px2 >= 5 && px2 <= 6)) && 
+	((py >= 7 && py <= 9) || (py2 >= 7 && py2 <= 9)) ){
+		
+		if(vez == 1){
+		printf("\n| PORTA |\n");
+		printf("\nPRESS E: ");
+		printf("SAIR");
+		}else if(vez == 2){
+		printf("\n| PORTA |\n");
+		printf("\nPRESS K: ");
+		printf("SAIR");
+		}
+		
+		if(tecla == 'e'){
+			break;
+		}
+	}
+	
+	if(vez == 1){	
+	SetConsoleTextAttribute(hConsole,7);
+	printf("\n\nNA VEZ:  %s ", nome[ii]);
+	SetConsoleTextAttribute(hConsole, 112);
+	printf(" ");
+	SetConsoleTextAttribute(hConsole, person);
+	printf("%c", player = 223);
+	SetConsoleTextAttribute(hConsole, 112);
+	printf(" ");
+	SetConsoleTextAttribute(hConsole,7);
+	printf("\nPROXIMO: %s   ", nome2[ii2]);
+	SetConsoleTextAttribute(hConsole, 112);
+	printf(" ");
+	SetConsoleTextAttribute(hConsole, person2);
+	printf("%c", player2 = 223);
+	SetConsoleTextAttribute(hConsole, 112);
+	printf(" \n\n");
+	
+	
+	SetConsoleTextAttribute(hConsole,7);
+	}else if(vez == 2){
+	SetConsoleTextAttribute(hConsole,7);
+	printf("\n\nNA VEZ:   %s ", nome2[ii2]);
+	SetConsoleTextAttribute(hConsole, 112);
+	printf(" ");
+	SetConsoleTextAttribute(hConsole, person2);
+	printf("%c", player = 223);
+	SetConsoleTextAttribute(hConsole, 112);
+	printf(" ");
+	SetConsoleTextAttribute(hConsole,7);
+	printf("\nPROXIMO:  %s ", nome[ii]);
+	SetConsoleTextAttribute(hConsole, 112);
+	printf(" ");
+	SetConsoleTextAttribute(hConsole, person);
+	printf("%c", player2 = 223);
+	SetConsoleTextAttribute(hConsole, 112);
+	printf(" \n\n");
+	SetConsoleTextAttribute(hConsole, 7);
+	}
+	
+	
+
+	
+	
+	
+	while(r >= 1){//loop	
+				
+	if(tecla == 'p'){
+		r = 0;
+	}
+	tecla = NULL;
+	if(_kbhit()){
+		tecla = getch();
+		}
+			
+			
+			
+	 
+		//PORTA
+		if(tecla == 's' && px == 5 && py == 8){
+		px--;	
+		}if(tecla == 'd' && px == 6 && py == 7){
+		py--;	
+		}if(tecla == 'a' && px == 6 && py == 9){
+		py++;	
+		}
+		
+		if(tecla == down && px2 == 5 && py2 == 8){
+		px2--;	
+		}if(tecla == right && px2 == 6 && py2 == 7){
+		py2--;	
+		}if(tecla == left && px2 == 6 && py2 == 9){
+		py2++;	
+		}
+		//PORTA
+		//LIMITE DO MAPA
+		if(tecla == 'w' && px == 0 && (py >= 0 && py <= 17)){
+		px++;	
+		}if(tecla == 'a' && (px >= 0 && px <= 6) && py == 0){
+		py++;	
+		}if(tecla == 's' && px == 6 && (py >= 0 && py <= 17)){
+		px--;	
+		}if(tecla == 'd' && (px >= 0 && px <= 6) && py == 17){
+		py--;	
+		}
+		
+		if(tecla == up && px2 == 0 && (py2 >= 0 && py2 <= 17)){
+		px2++;	
+		}if(tecla == left && (px2 >= 0 && px2 <= 6) && py2 == 0){
+		py2++;	
+		}if(tecla == down && px2 == 6 && (py2 >= 0 && py2 <= 17)){
+		px2--;	
+		}if(tecla == left && (px2 >= 0 && px2 <= 6) && py2 == 17){
+		py2--;	
+		}
+		
+		//LIMITE DO MAPA
+		//P1
+		//CAIXA 
+		if(tecla == 'w' && (px == 2) && (py >= 7 && py <= 9)){
+		px++;
+		}if(tecla == 's' && (px == 0) && (py >= 7 && py <= 9)){
+		px--;
+		}if(tecla == 'd' && (px == 1 && py == 6)){
+			py--;
+		}if(tecla == 'a' && (px == 1 && py == 10)){
+		py++;
+		}
+		//CAIXA 
+		if(tecla == 'a' && (px == 2 && py == 4)){
+		py++;		
+		}if(tecla == 's' && (px == 1 && py == 3)){
+		px--;		
+		}if(tecla == 'd' && (px == 2 && py == 2)){
+		py--;		
+		}if(tecla == 'w' && (px == 3 && py == 3)){
+		px++;		
+		}
+		//CAIXA 
+		if(tecla == 'a' && px == 4 && py == 4){
+		py++;	
+		}if(tecla == 's' && px == 3 && py == 3){
+		px--;	
+		}if(tecla == 'd' && px == 4 && py == 2){
+		py--;	
+		}if(tecla == 'w' && px == 5 && py == 3){
+		px++;	
+		}
+		//CAIXA
+		if(tecla == 'w' && px == 5 && py == 13){
+		px++;	
+		}if(tecla == 's' && px == 3 && py == 13){
+		px--;	
+		}if(tecla == 'd' && px == 4 && py == 12){
+		py--;	
+		}if(tecla == 'a' && px == 4 && py == 14){
+		py++;	
+		}
+		//CAIXA
+		if(tecla == 'd' && px == 2 && py == 12){
+		py--;	
+		}if(tecla == 's' && px == 1 && py == 13){
+		px--;
+		}if(tecla == 'a' && px == 2 && py == 14){
+		py++;	
+		}if(tecla == 'w' && px == 3 && py == 13){
+		px++;	
+		}
+		//CAIXA	
+		//P1
+		
+		//p2
+		
+		//CAIXA 
+		if(tecla == up && (px2 == 2) && (py2 >= 7 && py2 <= 9)){
+		px2++;
+		}if(tecla == down && (px2 == 0) && (py2 >= 7 && py2 <= 9)){
+		px2--;
+		}if(tecla == right && (px2 == 1 && py2 == 6)){
+			py2--;
+		}if(tecla == left && (px2 == 1 && py2 == 10)){
+		py2++;
+		}
+		//CAIXA 
+		if(tecla == left && (px2 == 2 && py2 == 4)){
+		py2++;		
+		}if(tecla == down && (px2 == 1 && py2 == 3)){
+		px2--;		
+		}if(tecla == right && (px2 == 2 && py2 == 2)){
+		py2--;		
+		}if(tecla == up && (px2 == 3 && py2 == 3)){
+		px2++;		
+		}
+		//CAIXA 
+		if(tecla == left && px2 == 4 && py2 == 4){
+		py2++;	
+		}if(tecla == down && px2 == 3 && py2 == 3){
+		px2--;	
+		}if(tecla == right && px2 == 4 && py2 == 2){
+		py2--;	
+		}if(tecla == up && px2 == 5 && py2 == 3){
+		px2++;	
+		}
+		//CAIXA
+		if(tecla == up && px2 == 5 && py2 == 13){
+		px2++;	
+		}if(tecla == down && px2 == 3 && py2 == 13){
+		px2--;	
+		}if(tecla == right && px2 == 4 && py2 == 12){
+		py2--;	
+		}if(tecla == left && px2 == 4 && py2 == 14){
+		py2++;	
+		}
+		//CAIXA
+		if(tecla == right && px2 == 2 && py2 == 12){
+		py2--;	
+		}if(tecla == down && px2 == 1 && py2 == 13){
+		px2--;
+		}if(tecla == left && px2 == 2 && py2 == 14){
+		py2++;	
+		}if(tecla == up && px2 == 3 && py2 == 13){
+		px2++;	
+		}
+		//CAIXA	
+		
+		//p2
+		
+														
+			
+	if(vez == 1 && tecla == 'w'){
+		px--;
+		r = 0;
+	}if(vez == 1 && tecla == 's'){
+		px++;
+		r = 0;
+	}if(vez == 1 && tecla == 'a'){
+		py--;
+		r = 0;
+	}if(vez == 1 && tecla == 'd'){
+		py++;
+		r = 0;
+	}if(tecla == 'e'){
+		r = 0;
+	}
+	if(vez == 2 && tecla == up){//cima
+		px2--;
+		r = 0;
+	}if(vez == 2 && tecla == down){//baixo
+		px2++;
+		r = 0;
+	}if(vez == 2 && tecla == left){//esquerda
+		py2--;
+		r = 0;
+	}if(vez == 2 && tecla == right){//direita
+		py2++;
+		r = 0;
+	}if(tecla == 'k' ){
+		r = 0;
+	}
+	
+	
+		
+		if((fase == 1 && px == 2 || px2 == 2) && ((py >= 7 && py <= 9) ||(py2 >= 7 && py2 <=9))){//caixa 
+			
+		if(caixaE2 != 1 && vez ==  1 && tecla == 'e'){
+			
+		p1caixa =1 + rand() % 5;
+							 			  		
+		caixaE1 = 1;	
+		vez=2;
+		confirm = 1;
+		tecla = NULL;
+		r=0;
+		
+		
+		
+	
+		}
+		else if(caixaE1 != 1 && vez == 2 && tecla == 'k'){
+			
+		p2caixa =1 + rand() % 5;	
+				
+		caixaE2 = 1;	
+		vez=1;
+		confirm = 2;
+		tecla = NULL;
+		r=0;	
+		
+		
+		
+		
+		}
+		
+		
+		}else if(fase == 1 && (px == 2 && py == 4) || (px2 == 2 && py2 == 4)){//caixa 2
+		if( caixaE2 != 2 && vez ==  1 && tecla == 'e'){
+		
+		p1caixa =1 + rand() % 5;		
+		
+				
+		caixaE1 = 2;	
+		vez=2;
+		confirm = 1;
+		tecla = NULL;
+		r=0;	
+		
+		
+		
+		}else if(caixaE1 != 2 && vez == 2 && tecla == 'k'){
+			
+		p2caixa =1 + rand() % 5;		
+			
+		caixaE2 = 2;	
+		vez=1;
+		confirm = 2;
+		tecla = NULL;
+		r=0;	
+		
+		
+		
+		}
+		
+		
+		}else if(fase == 1 && (px == 4 && py == 4) || (px2 == 4 && py2 == 4)){//caixa 4
+		if(caixaE2 != 4 && vez ==  1 && tecla == 'e'){
+			
+		p1caixa =1 + rand() % 5;		
+			
+		caixaE1 = 4;	
+		vez=2;
+		confirm = 1;
+		tecla = NULL;
+		r=0;	
+		
+		
+		}else if(caixaE1 != 4 && vez == 2 && tecla == 'k'){
+			
+		p2caixa =1 + rand() % 5;		
+			
+		caixaE2 = 4;	
+		vez=1;
+		confirm = 2;
+		tecla = NULL;
+		r=0;	
+		
+		
+		}
+		}else if(fase == 1 && (px == 2 && py == 12) || (px2 == 2 && py2 == 12)){//caixa 5
+		if(caixaE2 != 5 && vez ==  1 && tecla == 'e'){
+			
+		p1caixa =1 + rand() % 5;
+					
+		caixaE1 = 5;	
+		vez=2;
+		confirm = 1;
+		tecla = NULL;
+		r=0;	
+		
+		
+		}else if(caixaE1 != 5 && vez == 2 && tecla == 'k'){
+			
+		p2caixa =1 + rand() % 5;		
+			
+		caixaE2 = 5;	
+		vez=1;
+		confirm = 2;
+		tecla = NULL;
+		r=0;	
+		
+		
+		}
+		}else if(fase == 1 && (px == 4 && py == 12) || (px2 == 4 && py2 == 12)){//caixa 3
+		if(caixaE2 != 3 && vez ==  1 && tecla == 'e'){
+			
+		p1caixa =1 + rand() % 5;		
+			
+		caixaE1 = 3;
+		vez=2;
+		confirm = 1;
+		tecla = NULL;
+		r=0;	
+		
+		
+		}else if(caixaE1 != 3 && vez == 2 && tecla == 'k'){
+			
+		p2caixa =1 + rand() % 5;		
+			
+		caixaE2 = 3;	
+		vez=1;
+		confirm = 2;
+		tecla = NULL;
+		r=0;	
+		
+		
+		}
+		
+		}
+		
+		if(p1caixa != NULL && p2caixa != NULL){
+		system("cls");	
+		
+		
+		
+		if(p1caixa == 1){
+		printf("\n%s: ",nome[ii]);	
+		printf("Achou A Cobra\n");
+		system("pause");
+		r=0;	
+		}else if(p2caixa == 1){
+		printf("\n%s: ", nome2[ii2]);	
+		printf("Achou A Cobra\n");
+		system("pause");
+		r=0;	
+		}
+		
+		if(p1caixa == 2){	
+		printf("\n%s: ",nome[ii]);
+		printf("Achou o Botao\n");
+	 	system("pause");
+	 	r=0;
+		}else if(p2caixa == 2){	
+		printf("\n%s: ",nome2[ii2]);
+		printf("Achou o Botao\n");
+		system("pause");
+		r=0;	
+		}
+		
+		
+		
+		if(p1caixa >= 3 && p1caixa <= 5 && p2caixa >= 3 && p2caixa <= 5){
+		printf("\n%s: ",nome[ii]);		
+		printf("Caixa Vazia\n");
+		printf("\n%s: ",nome2[ii2]);	
+		printf("Caixa Vazia\n");
+		printf("\n JOGO CONTINUA\n");
+		system("pause");
+	 	p1caixa = NULL;
+	 	p2caixa = NULL;
+	 	caixaE1 = NULL;
+	 	caixaE2 = NULL;
+		r=0;    		  		
+		}
+		
+		
+		}
+		
+		
+		
+		}//lopp
+		
+		
+	if((p1caixa == 1 || p2caixa == 1 || p1caixa == 2 || p2caixa == 2) && (p1caixa != NULL && p2caixa != NULL)){
+		
+		int b=0,bf=0,cor,cor2,cor3,cor4;
+		
+		
+		while(bf <= 3){
+	 	bf=0; 
+		naveg=0;	
+		tecla=NULL;
+		system("cls");
+		
+		 while(bf <= 2){
+	 	bf=0;
+		
+		 if(naveg < 0){
+		naveg = 1;
+		}else if(naveg > 1){
+		naveg = 0;
+		}
+		char *b1[2] = {"Jogar Novamente", "Menu Principal"};
+    	switch(naveg){
+		
+	case 0:		   		   
+	cor = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;	
+	cor2 = 7;	
+	break;	
+	
+	case 1:
+	cor = 7;	
+	cor2 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;		
+	break;
+	    	
+	
+	}
+	
+		system("cls");
+		
+		
+		if(p1caixa == 1){
+		printf("\n Vitoria de %s.\n Derrota de %s. Achou uma cobra em uma das caixa.\n", nome2[ii2], nome[ii]);	
+		}
+		else if(p2caixa == 1){
+		printf("\n Vitoria de %s.\n Derrota de %s. Achou uma cobra em uma das caixa.\n", nome[ii], nome2[ii2]);	
+		}
+		else if(p1caixa == 2){
+		printf("\n Vitoria de %s('Achou o botao e conseguiu sair da tumba')\n Derrota de %s.('Nao conseguiu achar nada')\n", nome[ii], nome2[ii2]);	
+		}
+		else if(p2caixa == 2){
+		printf("\n Vitoria de %s('Achou o botao e conseguiu sair da tumba')\n Derrota de %s.('Nao conseguiu achar nada')\n", nome2[ii2], nome[ii]);		
+		}
+		
+		
+			
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("\n\n |");
+		SetConsoleTextAttribute(hConsole, cor);
+		printf(" %s ", b1[0]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor2);
+		printf("  %s ", b1[1]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		
+		while(bf <= 0){
+		tecla = NULL;	
+		if(_kbhit()){
+		tecla = getch();
+	    }	
+	    
+	    if(tecla == 'w'){
+			naveg--;
+		 	bf = 2;
+		}if(tecla == 's'){
+			naveg++;
+			bf = 2;
+			
+		}
+		if(naveg == 0 && tecla == 13){//jogar novamente
+		bf = 4;
+		b = 1;
+		r =3;
+		
+		
+		}
+		if(naveg == 1 && tecla == 13){//voltar menu principal
+		bf = 4;
+		r = 2;
+		a = 0;
+		c =0;   	
+		}
+		
+		
+		
+		}}}	
+				
+			
+	}	
+		
+		
+	
+	system("cls");
+	}while(r <= 1);
+	
+	
+	
+}//game2
+	
+	
+		
+int somV(){
+					Beep(900, 200);
+					Beep(600, 200);
+					Beep(900, 700);
+	}
+int somD(){
+		
+		Beep(300, 500);
+		Beep(200, 500);
+		Beep(150, 700);
+} 
+	
+	
+int jogo3(){
+	
+	
+	int b=0,bf=0,cor,cor2,cor3,cor4;
+	naveg = 0;
+	
+	while(bf <= 3){
+	 	bf=0;
+	 	b=0;
+		
+		 if(naveg < 0){
+		naveg = 2;
+		}else if(naveg > 2){
+		naveg = 0;
+		}
+			char *b1[4] = {"\n**Gousmas War**", "PLAY", "DESCRICAO", "VOLTAR"};
+    	switch(naveg){
+		
+	case 0:		   		   
+	cor = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;	
+	cor2 = 7;
+	cor3 = 7;	
+	break;	
+	
+	case 1:
+	cor = 7;	
+	cor2 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	cor3 = 7;		
+	break;
+	    
+	case 2:
+	cor = 7;		
+	cor2 = 7;
+	cor3 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	break;	
+	
+	}
+	
+		system("cls");	
+		printf("%s\n", b1[0]);
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor);
+		printf("    %s    ", b1[1]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor2);
+		printf("  %s " , b1[2]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor3);
+		printf("   %s   ", b1[3]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		SetConsoleTextAttribute(hConsole, 7);
+		
+		
+		while(bf <= 1){
+		tecla = NULL;	
+		if(_kbhit()){
+		tecla = getch();
+	    }	
+	    
+	    if(tecla == 'w'){
+			naveg--;
+		 	bf = 2;
+		}if(tecla == 's'){
+			naveg++;
+			bf = 2;
+			
+		}
+		if(naveg == 0 && tecla == 13){
+			b = 1;
+			bf = 4;
+		}
+		if(naveg == 1 && tecla == 13){
+			b = 2;
+			bf = 3;
+		}
+		if(naveg == 2 && tecla == 13){
+			
+			a = 0;
+			b = 3;
+			bf = 3;
+			naveg = 0;
+			return 0;
+		}
+		
+	
+		}
+		
+		
+		
+		
+		
+		
+		if(b == 2){//REGRAS
+		naveg=0;	
+		tecla=NULL;
+		bf=0;
+		system("cls");
+		
+		 while(bf <= 2){
+	 	bf=0;
+		
+		 if(naveg < 0){
+		naveg = 2;
+		}else if(naveg > 2){
+		naveg = 0;
+		}
+			char *b1[3] = {"**Descricao**", "Voltar", "Menu Principal"};
+    	switch(naveg){
+		
+	case 0:		   		   
+	cor = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;	
+	cor2 = 7;
+	cor3 = 7;	
+	break;	
+	
+	case 1:
+	cor = 7;	
+	cor2 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	cor3 = 7;		
+	break;
+	    	 
+	
+	}
+	
+		system("cls");	
+		printf("\n\n                      %s\n", b1[0]);
+		SetConsoleTextAttribute(hConsole, 15);
+		printf("\n\n  No jogo Gousma War, os jogadores controlam criaturas chamas \n   'Gousma', que podem se dividir e acumular furia ao serem \n  atacadas. Cada jogador comeca com duas Gousmas, cada uma\n   com 1 de furia inicial.");
+		printf("Quando uma gousma ataca outra,\n adiciona furia na gousma atacada equivalente a furia atual");
+		SetConsoleTextAttribute(hConsole, 4);
+		printf("\n\n( Exemplo: Se gousma1 com 2 de furia atacar gousma2 com 1 de\n furia, entao gousma 1 continuara com 2 de furia e gousma2\n ficara com 3 de furia )\n\n");	  		
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor);
+		printf("      %s      ", b1[1]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		printf("\n |");
+		SetConsoleTextAttribute(hConsole, cor2);
+		printf("  %s  " , b1[2]);
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("|");
+		
+		while(bf <= 0){
+		tecla = NULL;	
+		if(_kbhit()){
+		tecla = getch();
+	    }	
+	    
+	    if(tecla == 'w'){
+			naveg--;
+		 	bf = 2;
+		}if(tecla == 's'){
+			naveg++;
+			bf = 2;
+			
+		}
+		if(naveg == 0 && tecla == 13){//voltar uma tela
+		bf = 3;
+		b = 0;
+		}
+		if(naveg == 1 && tecla == 13){//voltar menu principal
+		a = 0;
+		c =0;
+		b = 3;
+		naveg = 0;
+		return 0;
+		}
+		
+		
+		
+		}}	
+				
+			}//REGRAS
+			
+		
+		if(b == 3){//voltar menu
+			a = NULL;
+			Beep(300, 50);
+			naveg = 0;
+			b = 0;
+			bf = 4;
+		}	
+			
+			
+		
+		}
+	
+	
+	
+		
+	while(1){
+int r, naveg = 0, telaIniFim = 0, telaAtaque = 0, telaDIVIDIR=0;
+char furia = 155, tecla = NULL;
+int Quantfuria1 = 1, Quantfuria2 = 1,Quantfuria3 = 1,Quantfuria4 = 1;
+int gousmaE = 0, gousmaE2 = 0, player1G1 = 0,player1G2 = 0, player2G1=0,player2G2=0;
+int vez = 1;
+	
+	
+	while(r>=0){
+		
+	system("cls");		
+	printf("\n    -X- Gousma War -X-\n");
+	printf("\n-- Player 1 --\n");
+	
+	if(player1G1 == 0){
+	SetConsoleTextAttribute(hConsole, 10);
+	printf("\n P1* GOUSMA(G1)");
+	}else if(player1G1 == 1){
+	SetConsoleTextAttribute(hConsole, 8);
+	printf("\nX ");
+	printf("P1* GOUSMA(G1)");
+	printf(" X");	
+	}
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria1; a++){
+	printf(" %c", furia);
+	}
+	
+	
+	if(player1G2 == 0){
+	SetConsoleTextAttribute(hConsole, 10);
+	printf("\n P1* GOUSMA(G2)");
+	
+	}else if(player1G2 == 1){
+	SetConsoleTextAttribute(hConsole, 8);
+	printf("\nX ");
+	printf("P1* GOUSMA(G2)");
+	printf(" X");
+		
+	}
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria2; a++){
+	printf(" %c", furia);
+	}
+	SetConsoleTextAttribute(hConsole, 7);
+	
+	
+	printf("\n\n-- Player 2 --\n");
+	
+	if(player2G1 == 0){
+	SetConsoleTextAttribute(hConsole, 10);
+	printf("\n P2* GOUSMA(G1)");
+	
+	}else if(player2G1 == 1){
+	SetConsoleTextAttribute(hConsole, 8);
+	printf("\nX ");
+	printf("P2* GOUSMA(G1)");
+	printf(" X");
+	}
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria3; a++){
+	printf(" %c", furia);
+	}
+	
+	if(player2G2 == 0){
+	SetConsoleTextAttribute(hConsole, 10);
+	printf("\n P2* GOUSMA(G2)");
+	
+	}else if(player2G2 == 1){
+	SetConsoleTextAttribute(hConsole, 8);
+	printf("\nX ");
+	printf("P2* GOUSMA(G2)");
+	printf(" X");
+	}
+	
+	
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria4; a++){
+	printf(" %c", furia);
+	}
+	SetConsoleTextAttribute(hConsole, 7);
+	
+	printf("\n\n-- ======== --\n");
+	
+	
+	if(vez == 1){
+	printf(" Vez: Player 1\n");
+	}else if(vez == 2){
+	printf(" Vez: Player 2\n");	
+	}
+	
+	
+	
+	
+	
+	//ATAQUE
+	
+	
+	//escolher atacar/dividir
+	if(telaIniFim == 0){
+	
+	
+			
+	if(naveg < 0){
+		naveg = 1;
+	}if(naveg > 1){
+		naveg = 0;
+	}	
+	
+	
+	switch(naveg){
+		
+	case 0:
+	SetConsoleTextAttribute(hConsole, 4 );
+	printf("\n [ %c ATACAR %c ]", 158, 158);
+	SetConsoleTextAttribute(hConsole, 7);
+	printf(" %c\n", 174);
+	SetConsoleTextAttribute(hConsole, 11);
+	printf("\n  %c DIVIDIR %c\n", 155, 155);
+	SetConsoleTextAttribute(hConsole, 7);	
+		break;
+	case 1:
+	SetConsoleTextAttribute(hConsole, 4);
+	printf("\n  %c ATACAR %c\n", 158, 158);
+	SetConsoleTextAttribute(hConsole, 11);
+	printf("\n [ %c DIVIDIR %c ]", 155, 155);
+	SetConsoleTextAttribute(hConsole, 7);
+	printf(" %c\n", 174);	
+		break;
+	}
+	}
+	//escolher atacar/dividir
+	
+	
+	
+	
+	
+	
+	
+	
+	//escolher gosma que vai atacar
+	if(telaAtaque == 2){
+		
+	
+	
+	//P1 VEZ
+	if(vez == 1){
+	
+	if(player1G1 == 0 && player1G2 == 0 ){
+			
+	if(naveg < 0){
+		naveg = 1;
+	}if(naveg > 1){
+		naveg = 0;
+	}	
+	
+	}
+	else if(player1G1 == 1){
+		naveg = 1;
+	}else if(player1G2 == 1){
+		naveg = 0;
+	}
+				
+	switch(naveg)
+	{
+	case 0:
+	//gousma1 p1	
+	SetConsoleTextAttribute(hConsole, 4 );
+	printf("\n { %c ATACAR %c } >> ", 158, 158);
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("[ P1*GOUSMA(G1) ] ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria1; a++){
+	printf("%c", furia);
+	}
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("  %c", 174);
+	//gousma1 p1
+	//gousma2 p1
+	
+	
+	
+	
+	
+	
+	
+	
+	if(player1G2 == 0){
+	SetConsoleTextAttribute(hConsole, 2);	
+	printf("\n                     P1*GOUSMA(G2)   ");
+	}
+	
+	
+	
+	else if(player1G2 == 1){
+	SetConsoleTextAttribute(hConsole, 8);
+	printf("\n                   X");
+	printf(" P1*GOUSMA(G2)");
+	printf("X   ");	
+	}
+	
+	
+	
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria2; a++){
+	printf("%c", furia);
+	}
+	//gousma2 p1
+	SetConsoleTextAttribute(hConsole, 11);
+	printf("\n\n  %c DIVIDIR %c\n", 155, 155);
+	SetConsoleTextAttribute(hConsole, 7);
+	
+		
+		break;
+	case 1:
+		
+	//gousma1 p1	
+	SetConsoleTextAttribute(hConsole, 4 );
+	printf("\n { %c ATACAR %c } >> ", 158, 158);
+	
+	
+	
+	
+	if(player1G1 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("  P1*GOUSMA(G1)   ");
+	
+	}
+	
+	
+	else if(player1G1 == 1){
+	SetConsoleTextAttribute(hConsole, 8);
+	printf("X");
+	printf(" P1*GOUSMA(G1) ");
+	printf("X ");
+		
+	}
+	
+	
+	
+	
+	
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria1; a++){
+	printf("%c", furia);
+	}
+	//gousma1 p1
+	//gousma2 p1
+	
+
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                   [ P1*GOUSMA(G2) ] ");
+	
+	
+	
+	
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria2; a++){
+	printf("%c", furia);
+	}
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("  %c", 174);
+	//gousma2 p1
+	SetConsoleTextAttribute(hConsole, 11);
+	printf("\n\n  %c DIVIDIR %c\n", 155, 155);
+	SetConsoleTextAttribute(hConsole, 7);
+			
+		break;
+	}
+	}
+	//P1 VEZ
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//P2 VEZ
+	if(vez == 2){
+	
+	if(player2G1 == 0 && player2G2 == 0){
+			
+	if(naveg < 0){
+		naveg = 1;
+	}if(naveg > 1){
+		naveg = 0;
+	}	
+	
+	}
+	else if(player2G1 == 1){
+		naveg = 1;
+	}else if(player2G2 == 1){
+		naveg = 0;
+	}	
+						
+	switch(naveg)
+	{
+	case 0:
+	//gousma1 p2	
+	SetConsoleTextAttribute(hConsole, 4 );
+	printf("\n { %c ATACAR %c } >> ", 158, 158);
+	
+	
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("[ P2*GOUSMA(G1) ] ");
+	SetConsoleTextAttribute(hConsole, 4);
+	
+	for(int a = 0; a < Quantfuria3; a++){
+	printf("%c", furia);
+	}
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("  %c", 174);
+	//gousma1 p2
+	//gousma2 p2
+	if(player2G2 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                     P2*GOUSMA(G2)   ");
+	}
+	
+	else if(player2G2 == 1){
+	SetConsoleTextAttribute(hConsole, 8);	
+	printf("\n                   X");	
+	printf(" P2*GOUSMA(G2) ");
+	printf("X ");
+		
+	}
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria4; a++){
+	printf("%c", furia);
+	}
+	//gousma2 p2
+	SetConsoleTextAttribute(hConsole, 11);
+	printf("\n\n  %c DIVIDIR %c\n", 155, 155);
+	SetConsoleTextAttribute(hConsole, 7);
+	
+		
+		break;
+	case 1:
+		
+	//gousma1 p2	
+	SetConsoleTextAttribute(hConsole, 4 );
+	printf("\n { %c ATACAR %c } >> ", 158, 158);
+	
+	if(player2G1 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("  P2*GOUSMA(G1)   ");
+	
+	}
+	if(player2G1 == 1){
+	SetConsoleTextAttribute(hConsole, 8);
+	printf("X");
+	printf(" P2*GOUSMA(G1) ");
+	printf("X ");
+		
+	}
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria3; a++){
+	printf("%c", furia);
+	}
+	//gousma1 p2
+	//gousma2 p2
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                   [ P2*GOUSMA(G2) ] ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria4; a++){
+	printf("%c", furia);
+	}
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("  %c", 174);
+	//gousma2 p2
+	SetConsoleTextAttribute(hConsole, 11);
+	printf("\n\n  %c DIVIDIR %c\n", 155, 155);
+	SetConsoleTextAttribute(hConsole, 7);
+			
+		break;
+	}
+	}
+	//P2 VEZ
+	
+	
+	}
+	//escolher gosma que vai atacar
+	
+
+	
+	
+	
+	
+	
+	
+	//escolher gosma que vai ser atacada
+	if(telaAtaque == 3){
+		
+		
+	if(player2G1 == 0 && player2G2 == 0){
+			
+	if(naveg < 0){
+		naveg = 1;
+	}if(naveg > 1){
+		naveg = 0;
+	}	
+	
+	}
+	
+	
+	
+	if(vez == 1){
+		
+	
+	if(player2G1 == 1){
+		naveg = 1;
+	}else if(player2G2 == 1){
+		naveg = 0;
+	}	
+				
+	switch(naveg){
+	case 0:
+	//GOUSMA ESCOLHIDA	
+	SetConsoleTextAttribute(hConsole, 4 );
+	printf("\n { %c ATACAR %c } >> ", 158, 158);
+	SetConsoleTextAttribute(hConsole, 2);
+	
+	
+	
+	
+	if(gousmaE == 1){
+	printf("{ P1*GOUSMA(G1) } ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria1; a++){
+	printf("%c", furia);
+	}
+	
+	
+	if(player1G2 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                     P1*GOUSMA(G2)   ");
+	}
+	
+	else if(player1G2 == 1){
+	SetConsoleTextAttribute(hConsole, 8);	
+	printf("\n                   X");	
+	printf(" P1*GOUSMA(G2) ");
+	printf("X ");
+		
+	}
+	
+	
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria2; a++){
+	printf("%c", furia);
+	}
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	else if(gousmaE == 2){
+			
+	if(player1G1 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("  P1*GOUSMA(G1)   ");
+	
+	}
+	if(player1G1 == 1){
+	SetConsoleTextAttribute(hConsole, 8);
+	printf("X");
+	printf(" P1*GOUSMA(G1) ");
+	printf("X ");
+		
+	}
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria1; a++){
+	printf("%c", furia);
+	}
+	
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                   { P1*GOUSMA(G2) } ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria2; a++){
+	printf("%c", furia);
+	}
+	}	
+	//GOUSMA ESCOLHIDA
+	SetConsoleTextAttribute(hConsole, 7);
+	
+	
+	printf("\n                           X");
+	
+	
+	//gousma1 p2	
+	SetConsoleTextAttribute(hConsole, 4 );
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                   [ P2*GOUSMA(G1) ] ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria3; a++){
+	printf("%c", furia);
+	}
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("  %c", 174);
+	//gousma1 p2
+	//gousma2 p2
+	if(player2G2 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                     P2*GOUSMA(G2)   ");
+	}
+	
+	else if(player2G2 == 1){
+	SetConsoleTextAttribute(hConsole, 8);	
+	printf("\n                   X");	
+	printf(" P2*GOUSMA(G2) ");
+	printf("X ");
+		
+	}
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria4; a++){
+	printf("%c", furia);
+	}
+	//gousma2 p2
+	
+	SetConsoleTextAttribute(hConsole, 11);
+	printf("\n\n  %c DIVIDIR %c\n", 155, 155);
+	SetConsoleTextAttribute(hConsole, 7);
+	
+		
+		break;
+	
+	
+	
+	
+	
+	
+	case 1:
+		
+	//GOUSMA ESCOLHIDA	
+	SetConsoleTextAttribute(hConsole, 4 );
+	printf("\n { %c ATACAR %c } >> ", 158, 158);
+	SetConsoleTextAttribute(hConsole, 2);
+	
+	
+	if(gousmaE == 1){
+	printf("{ P1*GOUSMA(G1) } ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria1; a++){
+	printf("%c", furia);
+	}
+	
+	if(player1G2 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                     P1*GOUSMA(G2)   ");
+	}
+	
+	else if(player1G2 == 1){
+	SetConsoleTextAttribute(hConsole, 8);	
+	printf("\n                   X");	
+	printf(" P1*GOUSMA(G2) ");
+	printf("X ");
+		
+	}
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria2; a++){
+	printf("%c", furia);
+	}
+	
+	}
+	
+	
+	
+	
+	else if(gousmaE == 2){
+		
+		
+	if(player1G1 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("  P1*GOUSMA(G1)   ");
+	
+	}
+	if(player1G1 == 1){
+	SetConsoleTextAttribute(hConsole, 8);
+	printf("X");
+	printf(" P1*GOUSMA(G1) ");
+	printf("X ");
+		
+	}
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria1; a++){
+	printf("%c", furia);
+	}
+	
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                   { P1*GOUSMA(G2) } ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria2; a++){
+	printf("%c", furia);
+	}
+	}	
+	//GOUSMA ESCOLHIDA
+	SetConsoleTextAttribute(hConsole, 7);
+	
+	
+	printf("\n                           X");
+	
+	
+	//gousma1 p2	
+	SetConsoleTextAttribute(hConsole, 4 );
+	
+	if(player2G1 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                     P2*GOUSMA(G1)   ");
+	}
+	
+	else if(player2G1 == 1){
+	SetConsoleTextAttribute(hConsole, 8);	
+	printf("\n                   X");	
+	printf(" P2*GOUSMA(G1) ");
+	printf("X ");
+		
+	}
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria3; a++){
+	printf("%c", furia);
+	}
+	//gousma1 p2
+	//gousma2 p2
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                   [ P2*GOUSMA(G2) ] ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria4; a++){
+	printf("%c", furia);
+	}
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("  %c", 174);
+	//gousma2 p2
+	
+	
+	SetConsoleTextAttribute(hConsole, 11);
+	printf("\n\n  %c DIVIDIR %c\n", 155, 155);
+	SetConsoleTextAttribute(hConsole, 7);
+			
+		break;
+	}
+	}
+	
+	
+	
+	if(vez == 2){
+		
+	
+	if(player1G1 == 1){
+		naveg = 1;
+	}else if(player1G2 == 1){
+		naveg = 0;
+	}		
+			
+				
+	switch(naveg){
+	case 0:
+	//GOUSMA ESCOLHIDA	
+	SetConsoleTextAttribute(hConsole, 4 );
+	printf("\n { %c ATACAR %c } >> ", 158, 158);
+	SetConsoleTextAttribute(hConsole, 2);
+	
+	if(gousmaE2 == 1){
+	printf("{ P2*GOUSMA(G1) } ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria3; a++){
+	printf("%c", furia);
+	}
+	
+	if(player2G2 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                     P2*GOUSMA(G2)   ");
+	}
+	
+	else if(player2G2 == 1){
+	SetConsoleTextAttribute(hConsole, 8);	
+	printf("\n                   X");	
+	printf(" P2*GOUSMA(G2) ");
+	printf("X ");
+		
+	}
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria4; a++){
+	printf("%c", furia);
+	}
+	
+	}
+	
+	
+	
+	
+	
+	else if(gousmaE2 == 2){
+		
+		
+		if(player2G1 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("  P2*GOUSMA(G1)   ");
+	
+	}
+	if(player2G1 == 1){
+	SetConsoleTextAttribute(hConsole, 8);
+	printf("X");
+	printf(" P2*GOUSMA(G1) ");
+	printf("X ");
+		
+	}
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria3; a++){
+	printf("%c", furia);
+	}
+	
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                   { P2*GOUSMA(G2) } ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria4; a++){
+	printf("%c", furia);
+	}
+	}	
+	
+	
+	//GOUSMA ESCOLHIDA
+	SetConsoleTextAttribute(hConsole, 7);
+	
+	
+	printf("\n                         X");
+	
+	
+	//gousma1 p2	
+	SetConsoleTextAttribute(hConsole, 4 );
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                   [ P1*GOUSMA(G1) ] ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria1; a++){
+	printf("%c", furia);
+	}
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("  %c", 174);
+	//gousma1 p2
+	//gousma2 p2
+	if(player1G2 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                     P1*GOUSMA(G2)   ");
+	}
+	
+	else if(player1G2 == 1){
+	SetConsoleTextAttribute(hConsole, 8);	
+	printf("\n                   X");	
+	printf(" P1*GOUSMA(G2) ");
+	printf("X ");
+		
+	}
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria2; a++){
+	printf("%c", furia);
+	}
+	//gousma2 p2
+	
+	SetConsoleTextAttribute(hConsole, 11);
+	printf("\n\n  %c DIVIDIR %c\n", 155, 155);
+	SetConsoleTextAttribute(hConsole, 7);
+	
+		
+		break;
+	case 1:
+		
+	//GOUSMA ESCOLHIDA	
+	SetConsoleTextAttribute(hConsole, 4 );
+	printf("\n { %c ATACAR %c } >> ", 158, 158);
+	SetConsoleTextAttribute(hConsole, 2);
+	
+	if(gousmaE2 == 1){
+	printf("{ P2*GOUSMA(G1) } ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria3; a++){
+	printf("%c", furia);
+	}
+	
+	if(player2G2 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                     P2*GOUSMA(G2)   ");
+	}
+	
+	else if(player2G2 == 1){
+	SetConsoleTextAttribute(hConsole, 8);	
+	printf("\n                   X");	
+	printf(" P2*GOUSMA(G2) ");
+	printf("X ");
+		
+	}
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria4; a++){
+	printf("%c", furia);
+	}
+	
+	}
+	
+	
+	
+	
+	
+	else if(gousmaE2 == 2){
+		
+		
+		if(player2G1 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("  P2*GOUSMA(G1)   ");
+	
+	}
+	if(player2G1 == 1){
+	SetConsoleTextAttribute(hConsole, 8);
+	printf("X");
+	printf(" P2*GOUSMA(G1) ");
+	printf("X ");
+		
+	}
+	
+	
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria3; a++){
+	printf("%c", furia);
+	}
+	
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                   { P2*GOUSMA(G2) } ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria4; a++){
+	printf("%c", furia);
+	}
+	}	
+	//GOUSMA ESCOLHIDA
+	SetConsoleTextAttribute(hConsole, 7);
+	
+	
+	printf("\n                         X");
+	
+	
+	//gousma1 p2	
+	SetConsoleTextAttribute(hConsole, 4 );
+	if(player1G1 == 0){
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                     P1*GOUSMA(G1)   ");
+	}
+	
+	else if(player1G1 == 1){
+	SetConsoleTextAttribute(hConsole, 8);	
+	printf("\n                   X");	
+	printf(" P1*GOUSMA(G1) ");
+	printf("X ");
+		
+	}
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria1; a++){
+	printf("%c", furia);
+	}
+	//gousma1 p2
+	//gousma2 p2
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\n                   [ P1*GOUSMA(G2) ] ");
+	SetConsoleTextAttribute(hConsole, 4);
+	for(int a = 0; a < Quantfuria2; a++){
+	printf("%c", furia);
+	}
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("  %c", 174);
+	//gousma2 p2
+	
+	
+	SetConsoleTextAttribute(hConsole, 11);
+	printf("\n\n  %c DIVIDIR %c\n", 155, 155);
+	SetConsoleTextAttribute(hConsole, 7);
+			
+		break;
+	}
+	}
+	
+	}
+	//escolher gosma que vai ser atacada
+	//ATAQUE
+	
+	
+	
+	
+	
+	
+	if(telaIniFim == 1){
+		system("cls");
+		
+		if(Quantfuria1 >= 5 && Quantfuria2 >= 5){
+		printf("\nPlayer 2 GANHOU\n");
+		printf("\nPlayer 1 PERDEU TODAS GOUSMAS\n");
+		}
+		if(Quantfuria3 >= 5 && Quantfuria4 >= 5){
+		printf("\nPlayer 1 GANHOU\n");
+		printf("\nPlayer 2 PERDEU TODAS GOUSMAS\n");
+		}
+		
+		printf("\n 1 - Tentar Novamente");
+		printf("\n 2 - Voltar");
+		
+		
+	}
+	
+	
+	if(telaDIVIDIR == 1){
+		
+	if(naveg < 0){
+		naveg = 1;
+	}else if(naveg > 1){
+		naveg = 0;
+	}	
+		
+	switch(naveg)
+	{
+	
+		
+		case 0:
+	SetConsoleTextAttribute(hConsole, 4 );
+	printf("\n  %c ATACAR %c \n", 158, 158);
+	SetConsoleTextAttribute(hConsole, 7);
+	SetConsoleTextAttribute(hConsole, 11);
+	printf("\n [ %c DIVIDIR %c ] >> CONFIRMACAO - S -\n                                  N  \n\n", 155, 155);
+	SetConsoleTextAttribute(hConsole, 7);	
+		break;
+	case 1:
+	SetConsoleTextAttribute(hConsole, 4);
+	printf("\n  %c ATACAR %c\n", 158, 158);
+	SetConsoleTextAttribute(hConsole, 11);
+	printf("\n [ %c DIVIDIR %c ] >> CONFIRMACAO   S \n                                - N - \n\n", 155, 155);
+	SetConsoleTextAttribute(hConsole, 7);
+		break;
+		
+	}
+	}
+	
+	if(telaIniFim != 1){
+	SetConsoleTextAttribute(hConsole,0 | 96);
+	printf("\n\n     NAVEGACAO:    \n\n");
+	printf("     W > CIMA      \n");
+	printf("     S > BAIXO     \n");
+	printf("ENTER > CONFIRMACAO\n");
+	printf(" Z > CANCELAR ACAO \n");
+	SetConsoleTextAttribute(hConsole, 7);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	r = 2;
+	while(r >= 2){
+	tecla = NULL;	
+		
+		if(kbhit()){
+			tecla = getch();
+		}
+		
+		
+		
+		if(tecla == 'w' || tecla == 'W'){
+			naveg--;
+			r=0;
+		}if(tecla == 's' || tecla == 'S'){
+			naveg++;
+			r=0;
+		}
+		//CANCELAR ACAO
+		if(tecla == 'Z' || tecla == 'z'){
+			
+			if(telaDIVIDIR != 0 || (telaIniFim == 0 && naveg == 1)){
+			naveg = 1;
+			}else {
+			naveg = 0;	
+			}
+			telaIniFim = 0;
+			telaAtaque = 0;
+			telaDIVIDIR = 0;
+			r=0;
+		}
+		//CANCELAR ACAO
+		
+		
+		//NAVEGAR NAS TELAS
+		//ACESSAR ATAQUE
+		if(tecla == 13 && naveg == 0 && telaIniFim == 0){
+			naveg = 0;
+			telaIniFim = 2;
+			telaAtaque = 2;
+			r=0;
+		}
+		//ACESSAR ATAQUE
+		//ACESSAR DIVISAO
+		else if(tecla == 13 && naveg == 1 && telaIniFim == 0){
+			naveg = 0;
+			telaIniFim = 2;
+			telaDIVIDIR = 1;
+			r=0;
+		}
+		//ACESSAR DIVISAO
+		//NAVEGAR NAS TELAS
+		
+		//dividir
+		else if(telaDIVIDIR == 1 && naveg == 0 && tecla == 13){
+			
+			if((Quantfuria1 == Quantfuria2) || (Quantfuria3 == Quantfuria4)){
+				printf("Divisao impossivel\n\n");
+				system("pause");
+				r=0;
+			}
+			else if((Quantfuria1 + Quantfuria2) % 2 == 0 && vez == 1){
+				Quantfuria2 = Quantfuria1 = (Quantfuria1 + Quantfuria2) / 2;
+				Quantfuria1 = Quantfuria2 = (Quantfuria1 + Quantfuria2) / 2;
+				SetConsoleTextAttribute(hConsole, 4);
+				printf("  FURIA 'PLAYER 1' DIVIDIDA\n\n");
+				SetConsoleTextAttribute(hConsole, 7);
+				system("pause");
+				telaDIVIDIR = 0;
+				telaIniFim = 0;
+				vez = 2;
+				r = 0;	
+			}
+			else if((Quantfuria3 + Quantfuria4) % 2 == 0 && vez == 2){
+				Quantfuria4 = Quantfuria3 = (Quantfuria3 + Quantfuria4) / 2;
+				Quantfuria3 = Quantfuria4 = (Quantfuria3 + Quantfuria4) / 2;
+				SetConsoleTextAttribute(hConsole, 4);
+				printf("  FURIA 'PLAYER 2' DIVIDIDA\n\n");
+				SetConsoleTextAttribute(hConsole, 7);
+				system("pause");
+				telaDIVIDIR = 0;
+				telaIniFim = 0;
+				naveg = 1;
+				vez = 1;
+				r = 0;
+			}
+			else{
+				printf("\n Valor Impar\n\n");
+				system("pause");
+				r=0;
+			}
+		}else if(telaDIVIDIR == 1 && naveg == 1 && tecla == 13){
+			telaDIVIDIR = 0;
+			telaIniFim = 0;
+			r=0;
+			
+		}
+		//dividir
+		
+		
+		//gousma escolhida player 1 para atacar
+		else if(tecla == 13 && naveg == 0 && telaAtaque == 2){
+			naveg = 0;
+			telaAtaque = 3;
+			if(vez == 1){
+			gousmaE = 1;
+			}
+			
+			else if(vez == 2){
+			gousmaE2 = 1;	
+			}
+			r=0;
+		}else if(tecla == 13 && naveg == 1 && telaAtaque == 2){
+			naveg = 0;
+			telaAtaque = 3;
+			if(vez == 1){
+			gousmaE = 2;
+			}
+			
+			else if(vez == 2){
+			gousmaE2 = 2;	
+			}
+			r=0;
+		}
+		//gousma escolhida player 1 para atacar
+		
+		
+		
+		//gosma atacada p2g1(furia3)
+		else if(tecla == 13 && naveg == 0 && telaAtaque == 3){
+			naveg = 0;
+			telaIniFim = 0;
+			telaAtaque = 1;
+			if(vez == 1){	
+			if(gousmaE == 1){
+				Quantfuria3 += Quantfuria1;
+			}else if(gousmaE == 2){
+				Quantfuria3 += Quantfuria2;
+			}
+			vez = 2;
+			}else if(vez == 2){
+			if(gousmaE2 == 1){
+				Quantfuria1 += Quantfuria3;
+			}else if(gousmaE2 == 2){
+				Quantfuria1 += Quantfuria4;
+			}
+			vez = 1;
+			}
+			
+			
+			r=0;
+			
+		}
+		//gosma atacada p2G2(furia4)
+		else if(tecla == 13 && naveg == 1 && telaAtaque == 3){
+			naveg = 0;
+			telaIniFim = 0;
+			telaAtaque = 1;
+			
+			if(vez == 1){	
+			if(gousmaE == 1){
+				Quantfuria4 += Quantfuria1;
+				
+			}else if(gousmaE == 2){
+				Quantfuria4 += Quantfuria2;
+				
+			}
+			vez = 2;
+			}
+			
+			else if(vez == 2){
+			if(gousmaE2 == 1){
+				Quantfuria2 += Quantfuria3;
+			}else if(gousmaE2 == 2){
+				Quantfuria2 += Quantfuria4;
+			}
+			vez = 1;
+			}
+			
+			r=0;
+		}
+		//gousma escolhida player 2 receber
+		
+		
+		//gousma morta
+		//player1
+		if(Quantfuria1 >= 5){
+			player1G1 = 1;
+			Quantfuria1 = 5;
+		}else{
+			player1G1 = 0;
+		}
+		if(Quantfuria2 >= 5){
+			player1G2 = 1;
+			Quantfuria2 = 5;
+		}else{
+			player1G2 = 0;
+		}
+		//player1
+		//player2
+		if(Quantfuria3 >= 5){
+			player2G1 = 1;
+			Quantfuria3 = 5;
+		}else{
+			player2G1 = 0;
+		}
+		if(Quantfuria4 >= 5){
+			player2G2 = 1;
+			Quantfuria4 = 5;
+		}else{
+			player2G2 = 0;
+		}
+		//player2
+		//gousma morta
+	
+		
+		
+		//JOGO ACABA	
+		if((Quantfuria1 >= 5 && Quantfuria2 >= 5) || (Quantfuria3 >= 5 && Quantfuria4 >= 5)){
+			telaAtaque = 4;
+			telaIniFim = 1;
+		}
+		//JOGO ACABA
+		
+		//TENTAR NOVAMENTE
+		if(tecla == '1' && telaIniFim == 1){
+			telaAtaque = 1;
+			break;
+		}if(tecla == '2' && telaIniFim == 1){
+			break;
+		}
+		//TENTAR NOVAMENTE
+		
+	}
+	
+	if(tecla == '1' && telaAtaque == 1){
+		break;
+	}
+	
+	if(tecla == '2'){
+		break;
+		return 0;
+	}
+	
+	}
+		if(tecla == '2'){
+		break;
+		return 0;
+		}
+	}//loop geral
+	
+		if(tecla == '2'){
+		return 0;
+	}
+}	
+	
+	
+	
+	
