@@ -1,0 +1,939 @@
+#include <stdio.h>
+#include <locale.h>
+#include <windows.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <time.h>
+#include <ctype.h>
+
+
+
+int somV();
+int somD();
+
+
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+int naveg = 0;	
+char tecla;	
+int rep = 0;
+char a = 0,c = NULL;
+int xx;	
+int re = 0;
+int fase = 0;			
+int som = 352;
+int person = 7, person2 = 7;
+	int ordem[5];
+	
+	char b = '5';
+	//notas musicais
+	int d = 261, d_m = 523, r = 300,
+	 r_m = 587, m = 330, 
+	m_m = 659, f = 352, 
+	so = 396, l = 440, 
+	si = 495;
+	//notas musicais
+	int p1=0,p2=0,p3=0,p4=0,p5=0;
+	char *pl_1[4] = {"A)","B)A cadela Laika","C)Neil Armstrong","D)Marcos Pontes"},
+	*pl_2[4] = {"A) Mauna Kea", "B) Dhaulagiri", "C) Monte Chimborazo", "D)"},
+	*pl_3[4] = {"A) Colombia", "B)", "C) China", "D) Bolvia"},
+	*pl_4[4] = {"A) Graham Bell", "B) Steve Jobs", "C)", "D) Henry Ford"}, 
+	*pl_5[4] = {"A) I", "B) II", "C) III", "D)"};
+	int i1 = NULL,i2 = NULL,i3 = NULL,i4 = NULL,i5 = NULL;
+	
+	
+	char texto[] = "No jogo 'Perguntas e Respostas', serao 5 Perguntas com 4 alternativas cada. \nNele veremos assuntos relacionados a Ciencias,Geografia e Portugues. ",
+	texto2[] = "\n\nAs Perguntas Serao Escolhidas De Forma Aleatoria E No Final Sera Mostrado \nQuantas Questoes Foram Acertadas e Quais Foram.",
+	regras[] = "\nPara Escolher Uma Alternativa E Necessario Apenas Um Clique Na Tecla \nQue Represente A Letra Da Alternativa Escolhida.\n";
+	
+		
+	char perg1[] = " | Quem foi a primeira pessoa a viajar no Espaco? |\n",
+	exp1[] = "O russo Yuri Gagarin (1934-1968) foi a primeira pessoa \na viajar para o espaco, o que aconteceu em 12 de abril de 1961.";
+
+	char perg2[] = " | Qual a montanha mais alta do mundo? |\n",
+	exp2[] = "O Monte Everest tem 8.848 metros de altitude e localiza-se no Nepal, \num pais asiatico que faz fronteira com a China e com a India.";
+
+	char perg3[] = "| Onde se localiza Machu Picchu? |\n",
+	exp3[] = "Machu Picchu localiza-se no Peru, pais da America do Sul que faz fronteira com o Brasil.";
+	
+	char perg4[] = "| Quem inventou a lampada? |\n",
+	exp4[] = "A lampada foi inventada por Thomas Edison (1847-1931) em 1879. No dia 21 de outubro,\n o inventor conseguiu manter uma lampada acessa durante 48 horas.";
+	
+	char perg5[] = " | Diante da visao de um predio com uma placa indicando SAPATARIA PAPALIA, um jovem deparou com a duvida:\n como pronunciar a palavra PAPALIA? |\n\n",
+	perg5_1[] ="Levado o problema a sala de aula, a discussao girou em torno da utilidade de conhecer as regras de acentuacao e,\n especialmente, do auxilio que elas podem dar a correta pronuncia de palavras. Apos discutirem pronuncia, regras de\n acentuacao e escrita, tres alunos apresentaram as seguintes conclusoes a respeito da palavra PAPALIA:",
+	perg5_2[] ="\nI. Se a silaba tonica for o segundo PA, a escrita deveria ser PAPALIA, pois a palavra seria paroxitona terminada\n em ditongo crescente.\nII. Se a silaba tonica for LI, a escrita deveria ser PAPALIA, pois ``i`` \ne ``a`` estariam formando hiato.\n",
+	perg5_3[] ="III. Se a silaba tonica for LI, a escrita deveria ser PAPALIA, pois nao haveria razao para o uso de acento grafico.\n\n",
+	exp5[] = "A afirmativa I esta de acordo com a seguinte regra: sao acentuadas as paroxitonas terminadas em ditongo\n crescente. A afirmativa II nao segue a seguinte regra: em hiatos, o ``i`` e o ``u`` tonicos(isolados na silaba ou formando silaba com S)\n sao acentuados desde que precedidos de vogal. Por fim, a \nafirmativa III esta correta, ja que paroxitonas \nterminadas em A nao sao acentuadas.";
+	
+	
+		char quests[4] = {'1', '2', '3', '4'};
+		int questvi[4] = {0}; 
+		int total_c = 0;
+			
+		int y = 0;
+		int cor,cor2,cor3;
+		
+		
+		
+		
+		
+		
+
+		int main(){
+
+if(b == '5'){//inicio das perguntas
+	tecla = NULL;
+		while(total_c < 4){//loop
+			
+        int indice;
+        do {
+            indice = rand() % 4;
+        } while (questvi[indice]);
+
+        questvi[indice] = 1; 
+        ordem[total_c] = indice;
+        total_c++;
+			
+		  if(quests[indice] == quests[0]){//PERGUNTA 1
+			int t1 = 200, t2 = 5000000, t3 = 50, som1 = 700;
+			int y = 0;
+			while(y <= 2){		
+			y = NULL;	
+			system("cls");	
+			tecla = NULL;
+				
+				for (int q = 0; perg1[q] != '\0'; q++) { 
+	    		putchar(perg1[q]);						
+        		for (int j = 0; j < t2; j++);
+			  	  }	
+			    printf("\n--------------------------\n");
+				printf("\n A) Yuri Gagarin \n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n B) A cadela Laika\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n C) Neil Armstrong\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n D) Marcos Pontes\n");
+				printf("\n--------------------------\n");
+				Beep(som1, t3);
+				
+				while(y <= 1){	
+				if(_kbhit()){
+				tecla = getch();
+	    		}
+				
+				if(tecla == 'a' || tecla == 'A'){//Certa
+				system("cls");	
+				printf("\n \\/ Altenativa certa: A) Yuri Gagarin \\/\n");
+				p1=1;	
+				somV();
+				system("pause");
+				y = 3;		
+				}
+				else if((tecla >= 65 && tecla <= 68) || (tecla >= 97 && tecla <= 100)){//Errada
+				system("cls");
+				if(tecla == 'a' || tecla == 'A'){
+					pl_1[i1] = pl_1[0];	
+				}if(tecla == 'b' || tecla == 'B'){
+					pl_1[i1] = pl_1[1]  ;
+				}if(tecla == 'c' || tecla == 'C'){
+					pl_1[i1] = pl_1[2];
+				}if(tecla == 'd' || tecla == 'D'){
+					pl_1[i1] = pl_1[3];
+
+				}
+				printf("\n X Altenativa Errada X\n");
+				somD();
+				printf("\nAlternativa Certa: A)Yuri Gagarin\n");
+				printf("\nEXPLICACAO : ");
+				
+				for (int q = 0; exp1[q] != '\0'; q++) {
+				putchar(exp1[q]);	
+  				for (int j = 0; j < 5000000; j++);
+ 	  	  	  	  }
+ 	  	  	    printf("\n\n");
+				system("pause");
+				y = 3; 	  	  	    
+				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){//Invalida
+					system("cls");
+					printf("\n\n   INVALIDO\n\n");
+					Sleep(500);
+					 t1 = 0;	
+ 	 		   	  	 t2 = 0; 
+				 	t3	= 0;
+				 	som1 = 0;
+					quests[indice] == quests[0];
+					y = 2;
+				}}}}//FIM PERGUNTA 1
+				
+				if(quests[indice] == quests[1]){//PERGUNTA 2
+					int t1 = 200, t2 = 5000000, t3 = 50, som1 = 700;
+					int y = 0;
+					
+					while(y <= 2){
+					y = NULL;	
+					system("cls");	
+					tecla = NULL;	
+						
+					for (int q = 0; perg2[q] != '\0'; q++) {
+   					putchar(perg2[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    
+	  	    	printf("\n--------------------------\n");
+				printf("\n A) Mauna Kea\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n B) Dhaulagiri\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n C) Monte Chimborazo\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n D) Monte Everest\n");
+				printf("\n--------------------------\n");
+				Beep(som1, t3);
+
+				while(y <= 1){
+				if(_kbhit()){
+				tecla = getch();
+	    		}		
+				if(tecla == 'd' || tecla == 'D'){									
+				system("cls");
+				printf("\n \\/ Altenativa certa: D) Monte Everest \\/\n");
+				p2=1;
+				somV();
+				system("pause");
+				y = 3;
+				
+				}else if((tecla >= 65 && tecla <= 68) || (tecla >= 97 && tecla <= 100)){
+				system("cls");
+				
+				if(tecla == 'a' || tecla == 'A'){
+					pl_2[i2] = pl_2[0];	
+				}if(tecla == 'b' || tecla == 'B'){
+					pl_2[i2] = pl_2[1];
+				}if(tecla == 'c' || tecla == 'C'){
+					pl_2[i2] = pl_2[2];
+				}if(tecla == 'd' || tecla == 'D'){
+					pl_2[i2] = pl_2[3];
+				}
+				printf("\n X Altenativa Errada X\n");
+				somD();
+				printf("\nAlternativa Certa: D) Monte Everest)\n");
+				
+				printf("\nEXPLICACAO : ");
+				for (int q = 0; exp2[q] != '\0'; q++) {
+   				putchar(exp2[q]);
+  				for (int j = 0; j < 5000000; j++);
+ 	  	  	  	  }
+ 	  	  	    printf("\n\n");
+ 	    		system("pause");
+				y = 3;
+					
+				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){
+					system("cls");
+					printf("\n\n   INVALIDO\n\n");
+					Sleep(500);
+					t1 = 0;	
+ 	 		   	  	t2 = 0; 
+				 	t3	= 0;
+				 	som1 = 0;
+					quests[indice] == quests[1];
+					y = 2;
+					
+				}
+			
+				}
+				}		
+				}//FIM PERGUNTA 2
+				
+				if(quests[indice] == quests[2]){//PERGUNTA 3
+					int t1 = 200, t2 = 5000000, t3 = 50, som1 = 700;
+					int y = 0;
+					while(y <= 2){
+					y = NULL;	
+					system("cls");
+					tecla = NULL;
+						
+					for (int q = 0; perg3[q] != '\0'; q++) {
+   					putchar(perg3[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    
+	  	    	printf("\n--------------------------\n");
+				printf("\n A) Colombia\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n B) Peru\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n C) China\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n D) Bolivia\n");
+				printf("\n--------------------------\n");
+				Beep(som1, t3);
+				
+				
+				while(y <= 1){
+				if(_kbhit()){
+				tecla = getch();
+	    		}	
+					
+				if(tecla == 'b' || tecla == 'B'){									
+				system("cls");
+				printf("\n \\/ Altenativa certa: B)PERU \\/\n");
+				p3=1;
+				somV();
+				system("pause");
+				y = 3;
+				system("cls");
+				}else if((tecla >= 65 && tecla <= 68) || (tecla >= 97 && tecla <= 100)){
+				system("cls");
+				
+				if(tecla == 'a' || tecla == 'A'){
+					pl_3[i3] = pl_3[0];	
+				}if(tecla == 'b' || tecla == 'B'){
+					pl_3[i3] = pl_3[1];
+				}if(tecla == 'c' || tecla == 'C'){
+					pl_3[i3] = pl_3[2];
+				}if(tecla == 'd' || tecla == 'D'){
+					pl_3[i3] = pl_3[3];
+				}
+				printf("\n X Altenativa Errada X\n");
+				somD();
+				printf("Alternativa Certa: B)Peru");
+				
+				printf("\nEXPLICACAO : ");
+				for (int q = 0; exp3[q] != '\0'; q++) {
+   				putchar(exp3[q]);
+  				for (int j = 0; j < 5000000; j++);
+					}
+ 	  	  	    printf("\n\n");
+				system("pause");
+				y = 3;
+				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){
+					system("cls");
+					printf("\n\n   INVALIDO\n\n");
+					Sleep(500);
+					t1 = 0;	
+ 	 		   	  	t2 = 0; 
+				 	t3	= 0;
+				 	som1 = 0;
+					quests[indice] == quests[2];
+					y = 2;
+				}
+				 	
+				}
+				}
+				}//FIM PERGUNTA 3
+				
+				if(quests[indice] == quests[3]){//PERGUNTA 4
+					int t1 = 200, t2 = 5000000, t3 = 50, som1 = 700;
+					int y = 0;
+					while(y <= 2){
+					y = NULL;
+					tecla = NULL;	
+					system("cls");
+					
+					for (int q = 0; perg4[q] != '\0'; q++) {
+   					putchar(perg4[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    
+	  	    	printf("\n--------------------------\n");
+				printf("\n A) Graham Bell\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n B) Steve Jobs\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n C) Thomas Edison\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n D) Henry Ford\n");
+				printf("\n--------------------------\n");
+				Beep(som1, t3);
+				
+				while(y <= 1){	
+				
+				if(_kbhit()){
+				tecla = getch();
+	    		}
+	    		
+				if(tecla == 'c' || tecla == 'C'){									
+				system("cls");
+				printf("\n \\/ Altenativa certa: C)Thomas Edison \\/\n");
+				p4=1;
+				somV();
+				system("pause");
+				y = 3;
+				
+				system("cls");
+				
+				}else if((tecla >= 65 && tecla <= 68) || (tecla >= 97 && tecla <= 100)){
+				system("cls");
+				
+				if(tecla == 'a' || tecla == 'A'){
+					pl_4[i4] = pl_4[0];	
+				}if(tecla == 'b' || tecla == 'B'){
+					pl_4[i4] = pl_4[1];
+				}if(tecla == 'c' || tecla == 'C'){
+					pl_4[i4] = pl_4[2];
+				}if(tecla == 'd' || tecla == 'D'){
+					pl_4[i4] = pl_4[3];
+				}
+				printf("\n X Altenativa Errada X\n");
+				somD();
+				printf("\nAlternativa Certa: C)Thomas Edison\n");
+			
+				printf("\nEXPLICACAO : ");
+				for (int q = 0; exp4[q] != '\0'; q++) {
+   				putchar(exp4[q]);
+  				for (int j = 0; j < 5000000; j++);
+ 	  	  	  	  }
+ 	  	  	    printf("\n\n");
+				system("pause");
+				y = 3;
+					 
+				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){
+					system("cls");
+					printf("\n\n   INVALIDO\n\n");
+					Sleep(500);
+					t1 = 0;	
+ 	 		   	  	t2 = 0; 
+				 	t3	= 0;
+				 	som1 = 0;
+					quests[indice] == quests[3];
+					y = 2;
+				}
+				}
+				}
+				}//FIM PERGUNTA 4	
+				
+				
+					
+		}//loop	
+		
+					if(total_c == 4){//PERGUNTA 5
+					int t1 = 200, t2 = 2000000, t3 = 50, som1 = 700;
+					int y = 0;
+					
+					
+					while(y <= 2){
+					y = NULL;
+					tecla = NULL;
+					system("cls");
+					printf("---ESPECIAL---\n");
+					
+					for (int q = 0; perg5[q] != '\0'; q++) {
+   					putchar(perg5[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    for (int q = 0; perg5_1[q] != '\0'; q++) {
+   					putchar(perg5_1[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    for (int q = 0; perg5_2[q] != '\0'; q++) {
+   					putchar(perg5_2[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    for (int q = 0; perg5_3[q] != '\0'; q++) {
+   					putchar(perg5_3[q]);
+  					for (int j = 0; j < t2; j++);
+	  	  	  	  	  }
+	  	  	  	    
+	  	    	printf("\n--------------------------\n");
+				printf("\n A) I\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n B) II\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n C) III\n");
+				Beep(som1, t3);
+				Sleep(t1);
+				printf("\n--------------------------\n");
+				printf("\n D) I e III.\n");
+				printf("\n--------------------------\n");
+				Beep(som1, t3);
+				
+				
+				while(y <= 1){
+				
+				if(_kbhit()){
+				tecla = getch();
+	    		}	
+					
+				if(tecla == 'd' || tecla == 'D'){									
+				system("cls");
+				printf("\n \\/ Altenativa certa: D) I e III \\/\n");
+				p5 = 1;
+				somV();
+				system("pause");
+				b = '1';
+				y = 3;
+				
+				}else if((tecla >= 65 && tecla <= 68) || (tecla >= 97 && tecla <= 100)){
+				system("cls");
+				if(tecla == 'a' || tecla == 'A'){
+					pl_5[i5] = pl_5[0];	
+				}if(tecla == 'b' || tecla == 'B'){
+					pl_5[i5] = pl_5[1];
+				}if(tecla == 'c' || tecla == 'C'){
+					pl_5[i5] = pl_5[2];
+				}if(tecla == 'd' || tecla == 'D'){
+					pl_5[i5] = pl_5[3];
+				}
+				
+				printf("\n X Altenativa Errada X\n");
+				somD();
+				printf("\nAlternativa Certa: D)I e III\n");
+			
+				printf("\nEXPLICACAO : ");
+				for (int q = 0; exp5[q] != '\0'; q++) {
+   				putchar(exp5[q]);
+  				for (int j = 0; j < 5000000; j++);
+ 	  	  	  	  }
+ 	  	  	    printf("\n\n");
+				system("pause");
+					b = '1';						
+					y = 3;
+				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){
+					system("cls");
+					printf("\n\n   INVALIDO\n\n");
+					Sleep(500);
+					t1 = 0;	
+ 	 		   	  	t2 = 0; 
+				 	t3	= 0;
+				 	som1 = 0;
+					y = 2;
+				}
+				}
+				}
+				}//FIM PERGUNTA 5
+		
+		
+		}//fim das perguntas	
+		
+		
+			
+		if(b == '1'){//Tela Final
+			int y = 0;
+			system("cls");
+				
+			int o, o2;
+			printf("\n\n**RESULTADOS**");
+			
+			o = p1+p2+p3+p4+p5;
+			o2 = 20*o;
+		 	
+			printf("\n\nVoce Acertou: %d%% (%d/5 Questões)\n\n", o2, o);
+			
+			
+			for (int i = 0; i < 4; i++) {
+				
+				
+						
+				
+            if(quests[ordem[i]] == quests[ordem[0]]){//Primeira Questao
+			
+			printf("1 Questao");
+			switch(quests[ordem[0]]){
+				
+			case '1':
+				
+			if(p1 == 1){	
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	  		
+			printf(" \\/\nAlternativa Certa: A)Yuri Gagarin \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p1 == 0){
+				
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X\nAlternativa Marcada: %s\n", pl_1[i1]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: A)Yuri Gagarin");
+					
+			}
+				break;
+			
+			case '2':
+			
+			if(p2 == 1){		
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+			printf(" \\/\nAlternativa Certa: D)Monte Everest \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if (p2 == 0){
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X \nAlternativa Marcada: %s\n", pl_2[i2]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: D)Monte Everest");
+			}
+				break;
+			
+			case '3':
+				
+				if(p3 == 1){//  3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: B)Peru \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p3 == 0){//  se 3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X\nAlternativa Marcada: %s\n", pl_3[i3]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: B)Peru");	
+			}
+				break;
+			
+			case '4':
+				
+				if(p4 == 1){//   4
+		
+		    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: C)Thomas Edison \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			}else if(p4 == 0){// se 4
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X \nAlternativa Marcada: %s\n", pl_4[i4]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: C)Thomas Edison");
+			}
+				break;
+			
+			
+			}
+			
+			
+			}//primeira questao
+		
+		
+			if(quests[ordem[i]] == quests[ordem[1]]){//Segunda Questao
+			printf("\n2 Questao");
+			switch(quests[ordem[1]]){
+				
+			case '1':
+				
+			if(p1 == 1){	
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	  		
+			printf(" \\/\nAlternativa Certa: A)Yuri Gagarin \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p1 == 0){
+				
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X\nAlternativa Marcada: %s\n", pl_1[i1]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: A)Yuri Gagarin");
+					
+			}
+				break;
+			
+			case '2':
+			
+			if(p2 == 1){		
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+			printf(" \\/\nAlternativa Certa: D)Monte Everest \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if (p2 == 0){
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X \nAlternativa Marcada: %s\n", pl_2[i2]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: D)Monte Everest");
+			}
+				break;
+			
+			case '3':
+				
+				if(p3 == 1){//  3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: B)Peru \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p3 == 0){//  se 3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X\nAlternativa Marcada: %s\n", pl_3[i3]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: B)Peru");	
+			}
+				break;
+			
+			case '4':
+				
+				if(p4 == 1){//   4
+		
+		    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: C)Thomas Edison \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			}else if(p4 == 0){// se 4
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X \nAlternativa Marcada: %s\n", pl_4[i4]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: C)Thomas Edison");
+			}
+				break;
+			
+			
+			}
+			
+			
+			}//segunda questao
+			
+			
+			
+			if(quests[ordem[i]] == quests[ordem[2]]){//Terceira Questao
+			
+			printf("\n\n3 Questao");		
+			switch(quests[ordem[2]]){
+				
+			case '1':
+				
+			if(p1 == 1){	
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	  		
+			printf(" \\/\nAlternativa Certa: A)Yuri Gagarin \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p1 == 0){
+				
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X\nAlternativa Marcada: %s\n", pl_1[i1]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: A)Yuri Gagarin");
+					
+			}
+				break;
+			
+			case '2':
+			
+			if(p2 == 1){		
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+			printf(" \\/\nAlternativa Certa: D)Monte Everest \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if (p2 == 0){
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X \nAlternativa Marcada: %s\n", pl_2[i2]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: D)Monte Everest");
+			}
+				break;
+			
+			case '3':
+				
+				if(p3 == 1){//  3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: B)Peru \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p3 == 0){//  se 3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X\nAlternativa Marcada: %s\n", pl_3[i3]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: B)Peru");	
+			}
+				break;
+			
+			case '4':
+				
+				if(p4 == 1){//   4
+		
+		    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: C)Thomas Edison \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			}else if(p4 == 0){// se 4
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X \nAlternativa Marcada: %s\n", pl_4[i4]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: C)Thomas Edison");
+			}
+				break;
+			
+			
+			}
+			
+			
+			}//terceira questao
+			
+			
+			
+			if(quests[ordem[i]] == quests[ordem[3]]){//Quarta Questao
+			
+			printf("\n\n4 Questao");
+			switch(quests[ordem[3]]){
+				
+			case '1':
+				
+			if(p1 == 1){	
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	  		
+			printf(" \\/\nAlternativa Certa: A)Yuri Gagarin \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p1 == 0){
+				
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X\nAlternativa Marcada: %s\n", pl_1[i1]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: A)Yuri Gagarin");
+					
+			}
+				break;
+			
+			case '2':
+			
+			if(p2 == 1){		
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+			printf(" \\/\nAlternativa Certa: D)Monte Everest \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if (p2 == 0){
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X \nAlternativa Marcada: %s\n", pl_2[i2]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: D)Monte Everest");
+			}
+				break;
+			
+			case '3':
+				
+				if(p3 == 1){//  3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: B)Peru \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			
+			}else if(p3 == 0){//  se 3
+			
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+			printf(" X\nAlternativa Marcada: %s\n", pl_3[i3]);
+			SetConsoleTextAttribute(hConsole, 7);
+			printf("Alternativa Certa: B)Peru");	
+			}
+				break;
+			
+			case '4':
+				
+				if(p4 == 1){//   4
+		
+		    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: C)Thomas Edison \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			}else if(p4 == 0){// se 4
+				
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X \nAlternativa Marcada: %s\n", pl_4[i4]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: C)Thomas Edison");
+			}
+				break;
+			
+			}
+			
+			}//quarta questao
+			
+			
+			}//for
+			
+			
+			if(p5 == 1){//  5
+			printf("\n\n5 Questao");
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	
+			printf(" \\/\nAlternativa Certa: D)I e III \n");
+			SetConsoleTextAttribute(hConsole, 7);
+			}else if(p5 == 0){//  se 5
+				printf("\n\n5 Questao");	
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+				printf(" X \nAlternativa Marcada: %s\n", pl_5[i5]);
+				SetConsoleTextAttribute(hConsole, 7);
+				printf("Alternativa Certa: D)I e III");
+			}
+			
+			
+			
+			
+			while(y <= 1){
+			printf("\n\n1 -Tente Novamente\n");
+			printf("2 - Menu ");
+			while(y <= 2){
+			if(_kbhit()){
+				tecla = getch();
+	    		}
+	    		if(tecla == '1'){
+					rep = 1;
+					y = 3;
+				}
+	    		if(tecla == '2'){
+					rep = 0;
+					a = '1'; 
+					y = 3;
+				}	
+				}
+			}
+			
+			
+		}//tela final
+		
+		
+		
+		
+		
+		}		
+		
+		
+		
+		
+		int somV(){
+					Beep(900, 200);
+					Beep(600, 200);
+					Beep(900, 700);
+	}
+int somD(){
+		
+		Beep(300, 500);
+		Beep(200, 500);
+		Beep(150, 700);
+} 
