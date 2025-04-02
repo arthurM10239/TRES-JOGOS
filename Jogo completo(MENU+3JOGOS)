@@ -17,7 +17,7 @@ int re = 0;
 int fase = 0;			
 int som = 352;
 int person = 7, person2 = 7;
-
+int portaF = 0;
 		
 int somV();
 int somD();				
@@ -34,7 +34,7 @@ int main(){
 	
 	while(c <= 1){//MENU | JOGO 1 A 3
 	system("cls");
-
+	
 
 	if(a == 0){//executa menu	
 		menu();
@@ -51,7 +51,6 @@ int main(){
 	
 	
 	if(a == '2'){//executa jogo 2				 			     		
-	  naveg=0;
   	   
 	   lobbyjogo2();	
 		
@@ -1306,9 +1305,8 @@ int menu(){
 		
 		
 	
-
-	int lobbyjogo2(){//jogo2 inicio
 	
+	int lobbyjogo2(){//jogo2 inicio
 	int b=0,bf=0,cor,cor2,cor3,cor4;
 	while(bf <= 3){	
 	char tela[7][18];
@@ -1331,7 +1329,7 @@ int menu(){
 	int pont2 = 0;
 	person = 7;
 	person2 = 7;
-	
+	naveg = 0;
 	
 	
 		
@@ -1415,6 +1413,7 @@ int menu(){
 			c =0;
 			b = 3;
 			bf = 3;
+			naveg = 1;
 		}
 		
 	
@@ -1674,13 +1673,15 @@ if(tela[x][y] == porta){
 		if(tecla == 'e'){
 			printf("Confirmar[enter]");
 			sair = 1;
-		
-		}
-		if(sair == 1 && tecla == 13){
+			
+		}else if(sair == 1 && tecla == 13){
 			break;
+		
 		}else{
 		sair = 0;
-		}	
+		}
+		
+		
 	}
 	else if(fase == 0 && (px2 == 5 || px2 == 6) && (py2 >= 7 && py2 <= 9)){
 		SetConsoleTextAttribute(hConsole,15 | 128);
@@ -2389,9 +2390,16 @@ if(tela[x][y] == porta){
 	
 	}while(r <= 3);
 	
-	while(bf <= 4){
-	if(fase == 1){//game
+	if(sair == 1){
+		c = 0;
+		break;
 		
+	}
+	
+	while(1){
+		
+	if(fase == 1){//game
+
 		game2();	   	
 		
 	}
@@ -2399,6 +2407,10 @@ if(tela[x][y] == porta){
 	fase = 0;
 	naveg = 0;	
 	break;	
+	}
+	if(portaF == 1){
+		
+		break;
 	}
 	
 	}
@@ -2440,6 +2452,10 @@ if(tela[x][y] == porta){
 int game2(){
 	
 	
+	
+	if(portaF == 0){
+	
+	
 	srand(time(NULL));
 	
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -2461,6 +2477,8 @@ int game2(){
 	int ii=0, ii2=0;
 	char *nome[20]={"Jose","Arthur","Davi","Beatriz","Henry","Cleber","Geovanna"}, 
 	*nome2[20]={"Jose","Arthur","Davi","Beatriz","Henry","Cleber","Geovanna"};
+	
+	
 	
 	vez = rand() % 2+1;
 	system("cls");
@@ -2717,14 +2735,31 @@ int game2(){
 	if(fase == 1 && ((px >= 5 && px <= 6) || (px2 >= 5 && px2 <= 6)) && 
 	((py >= 7 && py <= 9) || (py2 >= 7 && py2 <= 9)) ){
 		
-		if(vez == 1){
-		printf("\n| PORTA |\n");
+		if(vez == 1 && portaF == 1){
+		printf("\n  | PORTA |\n");
 		printf("\nPRESS E: ");
 		printf("SAIR");
-		}else if(vez == 2){
-		printf("\n| PORTA |\n");
+		if(tecla == 'e'){
+			break;
+		}
+		}else if(vez == 1 && portaF == 0){
+		printf("\n  | PORTA |\n");
+		printf("( TRANCADA )");
+		portaF = 0;	
+		}
+		
+		
+		if(vez == 2 && portaF == 1){
+		printf("\n  | PORTA |\n");
 		printf("\nPRESS K: ");
 		printf("SAIR");
+		if(tecla == 'e'){
+			break;
+		}
+		}else if(vez == 2 && portaF == 0){
+		printf("\n  | PORTA |\n");
+		printf("( TRANCADA )");
+		portaF = 0;	
 		}
 		
 		if(tecla == 'e'){
@@ -2773,9 +2808,11 @@ int game2(){
 	}
 	
 	
-
+	printf("\n %d", portaF);
 	
-	
+	if(portaF == 1 && (tecla == 'e' || tecla == 'k')){
+		break;
+	}
 	
 	while(r >= 1){//loop	
 				
@@ -2953,9 +2990,11 @@ int game2(){
 	}if(vez == 1 && tecla == 'd'){
 		py++;
 		r = 0;
-	}if(tecla == 'e'){
-		r = 0;
 	}
+	if(tecla == 'e' && portaF == 1){
+	r = 0;	
+	}
+	
 	if(vez == 2 && tecla == up){//cima
 		px2--;
 		r = 0;
@@ -3115,7 +3154,32 @@ int game2(){
 		
 		
 		
-		if(p1caixa == 1){
+		if(p1caixa == 2 || p2caixa == 2){
+		
+		if(p1caixa == 2){
+		printf("\n%s: ",nome[ii]);
+		printf("Achou o Botao\n");
+	 	system("pause");
+	 	portaF = 1;
+	 	vez = 1;
+	 	p1caixa = NULL;
+	 	p2caixa = NULL;
+	 	r=0;
+		}
+		else if(p2caixa == 2){
+		printf("\n%s: ",nome2[ii2]);
+		printf("Achou o Botao\n");
+		system("pause");
+		portaF = 1;
+		vez = 2;	
+		p1caixa = NULL;
+	 	p2caixa = NULL;
+	 	r=0;
+		}
+		   		  		
+		}
+		
+		else if(p1caixa == 1){
 		printf("\n%s: ",nome[ii]);	
 		printf("Achou A Cobra\n");
 		system("pause");
@@ -3127,17 +3191,7 @@ int game2(){
 		r=0;	
 		}
 		
-		if(p1caixa == 2){	
-		printf("\n%s: ",nome[ii]);
-		printf("Achou o Botao\n");
-	 	system("pause");
-	 	r=0;
-		}else if(p2caixa == 2){	
-		printf("\n%s: ",nome2[ii2]);
-		printf("Achou o Botao\n");
-		system("pause");
-		r=0;	
-		}
+		
 		
 		
 		
@@ -3163,7 +3217,7 @@ int game2(){
 		}//lopp
 		
 		
-	if((p1caixa == 1 || p2caixa == 1 || p1caixa == 2 || p2caixa == 2) && (p1caixa != NULL && p2caixa != NULL)){
+	 if((p1caixa == 1 || p2caixa == 1) && (p1caixa != NULL && p2caixa != NULL) ){
 		
 		int b=0,bf=0,cor,cor2,cor3,cor4;
 		
@@ -3269,8 +3323,14 @@ int game2(){
 	system("cls");
 	}while(r <= 1);
 	
+
+}else if(portaF == 1){
+	printf("JOGO ESTA FECHADO");
+	system("pause");
 	
 	
+}
+		
 }//game2
 	
 	
@@ -3290,7 +3350,7 @@ int somD(){
 	
 int jogo3(){
 	
-	
+	while(1){
 	int b=0,bf=0,cor,cor2,cor3,cor4;
 	naveg = 0;
 	
@@ -4457,7 +4517,7 @@ int vez = 1;
 	
 	
 	r = 2;
-	while(r >= 2){
+	while(r >= 2){//loop teclas
 	tecla = NULL;	
 		
 		if(kbhit()){
@@ -4683,12 +4743,15 @@ int vez = 1;
 		if(tecla == '1' && telaIniFim == 1){
 			telaAtaque = 1;
 			break;
-		}if(tecla == '2' && telaIniFim == 1){
-			break;
 		}
 		//TENTAR NOVAMENTE
+		//VOLTAR
+		if(tecla == '2' && telaIniFim == 1){
+			break;
+		}
+		//VOLTAR
 		
-	}
+	}//loop teclas
 	
 	if(tecla == '1' && telaAtaque == 1){
 		break;
@@ -4696,20 +4759,21 @@ int vez = 1;
 	
 	if(tecla == '2'){
 		break;
-		return 0;
 	}
 	
 	}
-		if(tecla == '2'){
+	if(tecla == '2'){
+		
 		break;
-		return 0;
-		}
+	}
+	
+	
 	}//loop geral
 	
-		if(tecla == '2'){
-		return 0;
-	}
+	
 }	
+
+}
 	
 	
 	
