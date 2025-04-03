@@ -18,7 +18,7 @@ int fase = 0;
 int som = 352;
 int person = 7, person2 = 7;
 int portaF = 0;
-
+int regrasJ1 = 0,regrasJ2 = 0,regrasJ3 = 0;
 		
 int somV();
 int somD();				
@@ -276,9 +276,14 @@ int menu(){
 		}else if(naveg > 2){
 		naveg = 0;
 		}
+		if(regrasJ1 == 0 && naveg == 0){	
+		naveg = 1;	
+		}
+		
     	switch(naveg){
 		
-	case 0:		   		   
+	case 0:
+			   		   
 	cor = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;	
 	cor2 = 7;
 	cor3 = 7;	
@@ -301,10 +306,21 @@ int menu(){
 		system("cls");	
 		printf("%s\n", b1[0]);
 		printf("\n |");
-		SetConsoleTextAttribute(hConsole, cor);
+		
+		if(regrasJ1 == 1){
+		SetConsoleTextAttribute(hConsole, cor);	
 		printf("    %s    ", b1[1]);
 		SetConsoleTextAttribute(hConsole, 7);
 		printf("|");
+		}else if(regrasJ1 == 0){
+		SetConsoleTextAttribute(hConsole, 4);	
+		printf("%c   %s   %c",157, b1[1], 157);	
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("| ");
+		SetConsoleTextAttribute(hConsole, 11);
+		printf("   ( Leia a descricao antes de jogar )");
+		}
+		
 		printf("\n |");
 		SetConsoleTextAttribute(hConsole, cor2);
 		
@@ -338,9 +354,10 @@ int menu(){
 			y = 3;
 		}
 		if(naveg == 0){
-		if(tecla == 13){
+		if(tecla == 13 && regrasJ1 == 1){
 			b = '5';
 			y = 3;
+			
 			
 		}}
 		
@@ -348,7 +365,7 @@ int menu(){
 		if(tecla == 13){
 			a = '2';
 			y = 3;
-			
+			regrasJ1 = 1;
 		}}
 		if(naveg == 2){
 		if(tecla == 13){
@@ -548,14 +565,13 @@ int menu(){
 				y = 3; 	  	  	    
 				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){//Invalida
 					system("cls");
-					printf("\n   INVALIDO\n\nESCOLHA ALGO ENTRE \n A | B | C | D |\n");
+					printf("\n\n   INVALIDO\n\n");
 					 t1 = 0;	
  	 		   	  	 t2 = 0; 
 				 	t3	= 0;
 				 	som1 = 0;
 					quests[indice] == quests[0];
-					system("pause");
-					break;
+					y = 2;
 				}}}}//FIM PERGUNTA 1
 				
 				if(quests[indice] == quests[1]){//PERGUNTA 2
@@ -628,15 +644,14 @@ int menu(){
 					
 				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){
 					system("cls");
-					printf("\n   INVALIDO\n\nESCOLHA ALGO ENTRE \n A | B | C | D |\n");
+					printf("\n\n   INVALIDO\n\n");
 					
 					t1 = 0;	
  	 		   	  	t2 = 0; 
 				 	t3	= 0;
 				 	som1 = 0;
 					quests[indice] == quests[1];
-					system("pause");
-					break;
+					y = 2;
 					
 				}
 			
@@ -714,15 +729,14 @@ int menu(){
 				y = 3;
 				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){
 					system("cls");
-					printf("\n   INVALIDO\n\nESCOLHA ALGO ENTRE \n A | B | C | D |\n");
+					printf("\n\n   INVALIDO\n\n");
 					
 					t1 = 0;	
  	 		   	  	t2 = 0; 
 				 	t3	= 0;
 				 	som1 = 0;
 					quests[indice] == quests[2];
-					system("pause");
-					break;
+					y = 2;
 				}
 				 	
 				}
@@ -802,15 +816,14 @@ int menu(){
 					 
 				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){
 					system("cls");
-					printf("\n   INVALIDO\n\nESCOLHA ALGO ENTRE \n A | B | C | D |\n");
+					printf("\n\n   INVALIDO\n\n");
 					
 					t1 = 0;	
  	 		   	  	t2 = 0; 
 				 	t3	= 0;
 				 	som1 = 0;
 					quests[indice] == quests[3];
-					system("pause");
-					break;
+					y = 2;
 				}
 				}
 				}
@@ -886,7 +899,7 @@ int menu(){
 				if(tecla == 'a' || tecla == 'A'){
 					pl_5[i5] = pl_5[0];	
 				}if(tecla == 'b' || tecla == 'B'){
-					pl_5[i5] = pl_5[1];	
+					pl_5[i5] = pl_5[1];
 				}if(tecla == 'c' || tecla == 'C'){
 					pl_5[i5] = pl_5[2];
 				}if(tecla == 'd' || tecla == 'D'){
@@ -908,14 +921,13 @@ int menu(){
 					y = 3;
 				}else if((tecla > 0 && tecla < 65) || (tecla > 68 && tecla < 97) || tecla > 100){
 					system("cls");
-					printf("\n   INVALIDO\n\nESCOLHA ALGO ENTRE \n A | B | C | D |\n");
+					printf("\n\n   INVALIDO\n\n");
 					
 					t1 = 0;	
  	 		   	  	t2 = 0; 
 				 	t3	= 0;
 				 	som1 = 0;
-					system("pause");
-					break;
+					y = 2;
 				}
 				}
 				}
@@ -1358,6 +1370,11 @@ int menu(){
 		}else if(naveg > 2){
 		naveg = 0;
 		}
+		if(regrasJ2 == 0 && naveg == 0){	
+		naveg = 1;	
+		}
+		
+		
 			char *b1[4] = {"\n**Cobra Na Caixa**", "PLAY", "DESCRICAO", "VOLTAR"};
     	switch(naveg){
 		
@@ -1385,10 +1402,19 @@ int menu(){
 		system("cls");	
 		printf("%s\n", b1[0]);
 		printf("\n |");
-		SetConsoleTextAttribute(hConsole, cor);
+		if(regrasJ2 == 1){
+		SetConsoleTextAttribute(hConsole, cor);	
 		printf("    %s    ", b1[1]);
 		SetConsoleTextAttribute(hConsole, 7);
 		printf("|");
+		}else if(regrasJ2 == 0){
+		SetConsoleTextAttribute(hConsole, 4);	
+		printf("%c   %s   %c",157, b1[1], 157);	
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("| ");
+		SetConsoleTextAttribute(hConsole, 11);
+		printf("   ( Leia a descricao antes de jogar )");
+		}
 		printf("\n |");
 		SetConsoleTextAttribute(hConsole, cor2);
 		printf("  %s " , b1[2]);
@@ -1425,6 +1451,7 @@ int menu(){
 		if(naveg == 1 && tecla == 13){
 			b = 2;
 			bf = 3;
+			regrasJ2 = 1;
 		}
 		if(naveg == 2 && tecla == 13){
 			
@@ -1544,9 +1571,7 @@ int menu(){
 			
 	if(b == 1){	
 	tecla='p';
-	
 	if(1){
-		
 		system("cls");
 		printf("\n\n     -CARREGANDO-\n ");
 		for(int j = 0;j<20;j++){
@@ -1698,7 +1723,6 @@ if(tela[x][y] == porta){
 			sair = 1;
 			
 		}else if(sair == 1 && tecla == 13){
-			c = 1;
 			break;
 		
 		}else{
@@ -2418,8 +2442,6 @@ if(tela[x][y] == porta){
 		c = 1;
 		break;
 		
-	}if(c == 1){
-		break;
 	}
 	
 	while(1){
@@ -2435,7 +2457,9 @@ if(tela[x][y] == porta){
 	break;	
 	}
 	
-	
+	if(c == 1){
+		break;
+	}
 	if(c == 0){
 		break;
 	}
@@ -2444,8 +2468,6 @@ if(tela[x][y] == porta){
 	}
 	
 	}
-	
-	
 	}
 	}//fim jogo 2
 	
@@ -2841,7 +2863,6 @@ int game2(){
 	
 	
 	
-	printf("%d", portaF);
 	
 	while(r >= 1){//loop	
 				
@@ -3022,13 +3043,13 @@ int game2(){
 	}
 	
 	if(fase == 1 && ((px >= 5 && px <= 6) || (px2 >= 5 && px2 <= 6)) && 
-	((py >= 7 && py <= 9) || (py2 >= 7 && py2 <= 9)) && portaF == 1){
+	((py >= 7 && py <= 9) || (py2 >= 7 && py2 <= 9)) && (vez == 1 || vez == 2) && portaF == 1){
 	
-	if(tecla == 'e' && vez == 1){
+	if(tecla == 'e'){
 	portaF = 2;	
 	r = 0;	
 	}
-	if(tecla == 'k' && vez == 2){
+	if(tecla == 'k'){
 	portaF = 3;	
 	r=0;	
 	}
@@ -3414,6 +3435,9 @@ int jogo3(){
 		}else if(naveg > 2){
 		naveg = 0;
 		}
+		if(regrasJ3 == 0 && naveg == 0){	
+		naveg = 1;	
+		}
 			char *b1[4] = {"\n**Gousmas War**", "PLAY", "DESCRICAO", "VOLTAR"};
     	switch(naveg){
 		
@@ -3440,10 +3464,19 @@ int jogo3(){
 		system("cls");	
 		printf("%s\n", b1[0]);
 		printf("\n |");
-		SetConsoleTextAttribute(hConsole, cor);
+		if(regrasJ3 == 1){
+		SetConsoleTextAttribute(hConsole, cor);	
 		printf("    %s    ", b1[1]);
 		SetConsoleTextAttribute(hConsole, 7);
 		printf("|");
+		}else if(regrasJ3 == 0){
+		SetConsoleTextAttribute(hConsole, 4);	
+		printf("%c   %s   %c",157, b1[1], 157);	
+		SetConsoleTextAttribute(hConsole, 7);
+		printf("| ");
+		SetConsoleTextAttribute(hConsole, 11);
+		printf("   ( Leia a descricao antes de jogar )");
+		}
 		printf("\n |");
 		SetConsoleTextAttribute(hConsole, cor2);
 		printf("  %s " , b1[2]);
@@ -3478,6 +3511,7 @@ int jogo3(){
 		if(naveg == 1 && tecla == 13){
 			b = 2;
 			bf = 3;
+			regrasJ3 = 1;
 		}
 		if(naveg == 2 && tecla == 13){
 			
