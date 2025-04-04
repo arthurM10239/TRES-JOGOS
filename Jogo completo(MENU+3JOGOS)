@@ -90,6 +90,7 @@ int menu(){
 	
 	int cor,cor2,cor3,cor4;
 	int y = 0;
+	
 	char *b1[5] = {"\n* * *MENU PRINCIPAL* * *", "Perguntas e Respostas",
 	 "Cobra Na Caixa", "Gousma War",
 	 "Sair"};
