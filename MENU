@@ -1,1 +1,140 @@
+#include <stdio.h>
+#include <windows.h>
+#include <conio.h>
 
+int main(){
+	
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	
+int naveg = 0;	
+char tecla;	
+int rep = 0;
+char a = 0,c = NULL;
+int xx;	
+int re = 0;		
+int som = 352;
+
+
+
+int cor,cor2,cor3,cor4;
+	int y = 0;
+	char *b1[5] = {"\n* * *MENU PRINCIPAL* * *", "Perguntas e Respostas",
+	 "Cobra Na Caixa", "Gousma War",
+	 "Sair"};
+	 if(naveg < 0){
+	naveg = 3;
+	}else if(naveg > 3){
+		naveg = 0;
+	}
+	 
+    switch(naveg){
+		
+	case 0:		   		   	
+	cor = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;	
+	cor2 = 7;
+	cor3 = 7;
+	cor4 = 7;	
+	break;	
+	
+	case 1:
+	cor = 7;	
+	cor2 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	cor3 = 7;
+	cor4 = 7;		
+	break;
+	    
+	case 2:
+			
+	cor2 = 7;
+	cor3 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	cor4 = 7;
+	break;	
+		
+	case 3:
+	cor2 = 7;
+	cor3 =7;
+	cor4 = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED;
+	break;
+	
+	}
+	printf("\n %s \n", b1[0]);
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("\n ----------------------\n|");
+	SetConsoleTextAttribute(hConsole, cor);
+	printf("%s ", b1[1]);
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("| \n ----------------------\n|");
+	SetConsoleTextAttribute(hConsole, cor2);
+	printf("   %s     ",b1[2]);
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("| \n ----------------------\n|");
+	SetConsoleTextAttribute(hConsole, cor3);
+	printf("     %s       ",b1[3]);
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("| \n ----------------------\n|"); 
+	SetConsoleTextAttribute(hConsole, cor4);
+	printf("        %s          ",b1[4]);
+	SetConsoleTextAttribute(hConsole, 7);
+	printf("| \n ----------------------");
+	printf("\n\nNavegacao:");
+	printf("\nCIMA  - w\nBAIXO - s ");
+	SetConsoleTextAttribute(hConsole, 2);
+	printf("\nConfirmacao - Enter");
+	SetConsoleTextAttribute(hConsole, 7);
+	
+	
+	while(y <= 1){
+	tecla = NULL;
+	
+	if(_kbhit()){
+		tecla = getch();
+	    }
+		
+		if(tecla == 'w' || tecla == 'W'){
+			naveg--;
+			y = 2;
+		}if(tecla == 's' || tecla == 'S'){
+			naveg++;
+			y = 2;
+		}
+		
+		if(rep == 1){
+			a = '1';
+			y = 2;
+		}
+		
+		if(naveg == 0){
+			if(tecla == 13){
+			a = '1';
+			naveg = 0;
+			y = 2;
+			Beep(500, 50);
+			Beep(700, 50);
+			}
+		}if(naveg == 1){
+			if(tecla == 13){
+			a = '2';
+			c = '2';
+			y = 2;
+			Beep(500, 50);
+			Beep(700, 50);
+			}
+		}if(naveg == 2){
+			if(tecla == 13){
+			a = '3';
+			y = 2;
+			Beep(500, 50);
+			Beep(700, 50);
+			}
+		}if(naveg == 3){
+			if(tecla == 13){
+			a = 4;
+			c = '2';
+			y = 2;
+			Beep(som, 50);
+			}
+		}	
+  	
+	}
+}	
+	
