@@ -48,7 +48,7 @@ CODIGO DO MENU SENDO EXECUTADO
 
 <br/>
 
->Pagina para dar play no jogo e acessar na descrição
+>Pagina para dar play no jogo e acessar a descrição
 
 ![image](https://github.com/user-attachments/assets/88623a91-c4ea-4943-9f81-dd5d7ce29d4b)
 
