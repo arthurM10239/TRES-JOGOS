@@ -1,7 +1,7 @@
 # PROJETO DOS TRES-JOGOS
 ALUNOS: Arthur Miguel e Davi Duarte :shipit:
 
-Neste projeto foi apresentadado um codigo que rodara um MENU que atraves dele o usuario podera acessar outros 3 jogos. Esses jogos sao <br/><br/>  `Perguntas e Respostas` 
+Neste projeto foi apresentadado um codigo que rodara um MENU e atraves dele o usuario podera acessar 3 jogos. Esses jogos sao <br/><br/>  `Perguntas e Respostas` 
 <br/>  `Cobra na Caixa`  <br/>  `Gousma War` 
 
 <br/>
