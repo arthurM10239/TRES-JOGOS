@@ -14,7 +14,7 @@ Referencia Utilizadas[^1]
 
 # MENU PRINCIPAL
 >No codigo feito para o 'MENU PRINCIPAL' foi utilizado funções diversas como: <br/>
-`Kbhit() ` `Switch{}`<br/>`Getch() ` `If Else `<br/>`HANDLE  ` `char    `<br/>`While() ` `printf()`
+`Kbhit() ` `Switch{}`<br/>`Getch() ` `If Else `<br/>`HANDLE  ` `char    `<br/>`While() ` `printf()`<br/>`int`
 
 <br/>
 
@@ -118,7 +118,7 @@ CODIGO DO MENU SENDO EXECUTADO
 
 >No codigo feito para o 'COBRA NA CAIXA ( JOGO 2 )' foi utilizado funções diversas como: <br/>
 `Kbhit() ` `Switch{}`<br/>`Getch() ` `If Else `<br/>`HANDLE  ` `char    `<br/>`While() ` `printf()`<br/>`srand   `
-`vetores `<br/>`matriz  `
+`vetores `<br/>`matriz  ` `int     `
 
 >Descriçao do Pergunta e Respostas ( jogo 1 )
 
@@ -182,22 +182,60 @@ CODIGO DO MENU SENDO EXECUTADO
 ![image](https://github.com/user-attachments/assets/e6b12878-cc52-4a3d-9525-544a71b768ed)
 ![image](https://github.com/user-attachments/assets/059ce716-7ad4-4761-a079-ffdcf3bb793c)
 
+>E entao o jogo terminaram e perguntara se o usuario jogarar novamente ou voltara para o menu
 
-<br/>
+![image](https://github.com/user-attachments/assets/b4dd4a5e-96df-4cd4-9de2-cf7f4599aac8)
 
-
-
-
-
-<br/>
+<br/><br/>
 
 
 
-# GOUSMA WAR ( JOGO 3 )
+# GOUSMAS WAR ( JOGO 3 )
+`Kbhit() ` `Switch{}`<br/>`Getch() ` `If Else `<br/>`HANDLE  ` `char    `<br/>`While() ` `printf()`<br/>`srand   `
+`int     `
+
+>Descriçao do Gousmas War ( jogo 3 )
+
+![image](https://github.com/user-attachments/assets/ed6acce8-c96b-4c95-9b72-678caf130c0d)
+
+>No jogo gousma war sao dois players e cada um deles comecara com duas goumas com nivel de furia 1
+
+![image](https://github.com/user-attachments/assets/4789064e-6d2f-41e8-a7cd-bc1b72ac8702)
+
+>Quando uma gousma é atacada a sua furia aumenta dependendo do valor que estiver a furia do oponente que o atacou<br/>
+Neste caso a gousma 1 do player 1 atacou a gousma 1 do player 2
+
+![image](https://github.com/user-attachments/assets/968c0708-9908-45df-a928-765796c77638)
+
+>Quando selecionamos a opcao de ataque é mostrado qual gousma nossa ira atacar, depois de escolhida ira aparecer qual goums do oponente ira ser atacada
+
+>![image](https://github.com/user-attachments/assets/724d3c11-4427-459d-bb7a-2b99d79552ec)
+
+>Quando a soma do valor das duas gousmas do player for `par` ele podera usar a opção `Dividir`
+
+![image](https://github.com/user-attachments/assets/8e8e1e5d-1cd1-4b9f-a56a-2e63e3359ed4)
+![image](https://github.com/user-attachments/assets/2c4890ba-3446-4fcc-963d-9b8cb0065f56)
+
+>Se o valor de furia for igual a 5 a gousma ira ser `eliminada`.
+
+![image](https://github.com/user-attachments/assets/5353a0d7-f2b2-47ff-a606-ab2cbf45a2f2)
+
+>Se uma das gousmas estiver `eliminada` mas o valor da soma das duas gousmas do player for par ele podera usar o `dividir` para reviver sua gousma
+
+![image](https://github.com/user-attachments/assets/9f779604-3a78-451f-81bb-d14b1d8510f3)
+![image](https://github.com/user-attachments/assets/5cabe9ca-8b05-4fb4-ac01-d3ccfef85bfc)
+
+>Se o valor da furia for igual entao a divisao sera impossivel
+
+![image](https://github.com/user-attachments/assets/3560236f-3ef7-4480-986d-d27ed68450d1)
 
 
 
+>Quando as duas gousmas de um player forem `Eliminadas` o jogo ira terminar e o player que continuar com pelo menos uma gousma viva ira ganhar.<br/>
+e entao ira aparecer dois botoes, um para jogar novamente e outro para voltar para o menu
 
+![image](https://github.com/user-attachments/assets/ee181bde-6242-4896-bdde-9003693ffd8b)
+![image](https://github.com/user-attachments/assets/b37afc81-46bc-4b1f-8b3e-1719b7411d3f)
 
 
 
