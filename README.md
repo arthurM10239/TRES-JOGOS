@@ -250,7 +250,8 @@ e entao ira aparecer dois botoes, um para jogar novamente e outro para voltar pa
 Referencias utilizadas: <br/>https://pt.stackoverflow.com/questions/68872/c-mudar-cor-de-letras-v%C3%A1rias-cores-em-uma-s%C3%B3-tela<br/>
 <br/>https://pt.stackoverflow.com/questions/317440/como-colocar-som-em-c<br/>
 <br/>https://pt.stackoverflow.com/questions/200714/quais-s%C3%A3o-os-c%C3%B3digos-ascii-das-setas-direcionais-do-teclado<br/><br/>
-https://stackoverflow.com/questions/49833816/how-do-i-use-kbhit-in-c<br/>
+https://stackoverflow.com/questions/49833816/how-do-i-use-kbhit-in-c<br/><br/>
+https://www.youtube.com/watch?v=fx_w5Bpc4IY
 <br/><br/><br/><br/><br/><br/><br/><br/>
 
 
